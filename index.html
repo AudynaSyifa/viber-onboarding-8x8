@@ -1,1193 +1,998 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Viber Business Messages — Onboarding Guide | 8x8</title>
-<style>
-  :root {
-    --viber: #7360F2;
-    --viber-dark: #5B4BD8;
-    --viber-light: #F0EEFF;
-    --viber-glow: rgba(115,96,242,0.08);
-    --dark: #1F1F2E;
-    --body-text: #2D2D3A;
-    --surface: #F8F8FC;
-    --card: #FFFFFF;
-    --card-hover: #F5F4FF;
-    --lime: #C9DC50;
-    --teal: #04888A;
-    --orange: #F37944;
-    --white: #FFFFFF;
-    --muted: #6B7280;
-    --border: #E5E7EB;
-    --border-viber: rgba(115,96,242,0.25);
-    --success: #16A34A;
-    --success-bg: #F0FDF4;
-    --success-border: #BBF7D0;
-    --warn: #D97706;
-    --warn-bg: #FFFBEB;
-    --warn-border: #FDE68A;
-    --locked: #E5E7EB;
-    --locked-text: #9CA3AF;
-    --radius: 14px;
-    --radius-sm: 8px;
-  }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Viber Business Messaging — Onboarding Guide | 8x8</title>
+  <style>
+    :root {
+      --bg: #f6f8fa;
+      --bg2: #ffffff;
+      --bg3: #eef1f4;
+      --border: #d0d7de;
+      --text: #1f2328;
+      --muted: #57606a;
+      --accent: #7360f2;
+      --accent-dark: #5b4bd4;
+      --accent-bg: rgba(115,96,242,0.08);
+      --accent-border: rgba(115,96,242,0.25);
+      --warn: #9a6700;
+      --warn-bg: #fff8c5;
+      --warn-border: #d4a017;
+      --danger: #cf222e;
+      --danger-bg: #ffebe9;
+      --danger-border: #ffa198;
+      --info: #0550ae;
+      --info-bg: #dbeafe;
+      --info-border: #93c5fd;
+      --green: #1a7f37;
+      --green-bg: #dafbe1;
+      --green-border: #82cfac;
+      --card-bg: #ffffff;
+      --shadow: 0 1px 3px rgba(0,0,0,0.08), 0 1px 2px rgba(0,0,0,0.04);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      font-size: 15px;
+    }
 
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  html { scroll-behavior: smooth; }
-  body {
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    background: #FFFFFF;
-    color: var(--dark);
-    font-size: 15px;
-    line-height: 1.65;
-    min-height: 100vh;
-  }
+    /* NAV */
+    nav {
+      position: sticky; top: 0;
+      background: rgba(255,255,255,0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      z-index: 100;
+      padding: 0 32px;
+      display: flex; align-items: center; gap: 24px;
+      height: 56px;
+      box-shadow: 0 1px 0 var(--border);
+    }
+    .nav-brand { font-weight: 800; font-size: 17px; color: var(--text); text-decoration: none; flex-shrink: 0; }
+    .nav-brand span { color: var(--accent); }
+    nav ul { display: flex; gap: 2px; list-style: none; flex-wrap: wrap; }
+    nav ul a { color: var(--muted); text-decoration: none; font-size: 13.5px; padding: 6px 11px; border-radius: 6px; transition: all 0.15s; }
+    nav ul a:hover { color: var(--text); background: var(--bg3); }
 
-  /* ─── LAYOUT ─── */
-  .app { display: flex; min-height: 100vh; }
+    /* HERO */
+    .hero { background: linear-gradient(160deg, #f0eeff 0%, #ffffff 60%); border-bottom: 1px solid var(--border); }
+    .hero-inner { max-width: 960px; margin: 0 auto; padding: 68px 32px 56px; text-align: center; }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: var(--accent-bg); color: var(--accent-dark);
+      border: 1px solid var(--accent-border);
+      border-radius: 20px; padding: 5px 14px;
+      font-size: 12.5px; font-weight: 700; margin-bottom: 20px;
+    }
+    .hero h1 { font-size: clamp(28px, 5vw, 48px); font-weight: 800; line-height: 1.15; letter-spacing: -0.8px; color: var(--text); margin-bottom: 16px; }
+    .hero h1 strong { color: var(--accent-dark); }
+    .hero p { font-size: 16.5px; color: var(--muted); max-width: 580px; margin: 0 auto 44px; line-height: 1.7; }
+    .stats {
+      display: inline-flex; overflow: hidden;
+      background: var(--bg2); border: 1px solid var(--border);
+      border-radius: 14px; box-shadow: var(--shadow);
+    }
+    .stat { text-align: center; padding: 18px 32px; border-right: 1px solid var(--border); }
+    .stat:last-child { border-right: none; }
+    .stat .num { font-size: 26px; font-weight: 800; color: var(--text); line-height: 1; }
+    .stat .num span { color: var(--accent-dark); }
+    .stat .label { font-size: 11px; color: var(--muted); margin-top: 4px; text-transform: uppercase; letter-spacing: 0.5px; }
 
-  /* ─── SIDEBAR ─── */
-  .sidebar {
-    width: 280px;
-    background: #FFFFFF;
-    border-right: 1px solid var(--border);
-    position: fixed;
-    top: 0; left: 0; bottom: 0;
-    display: flex;
-    flex-direction: column;
-    z-index: 50;
-    overflow-y: auto;
-  }
-  .sidebar-brand {
-    padding: 24px 24px 20px;
-    border-bottom: 1px solid var(--border);
-  }
-  .sidebar-brand .logo { font-size: 13px; font-weight: 800; color: var(--dark); letter-spacing: 1px; text-transform: uppercase; }
-  .sidebar-brand .product { font-size: 11px; color: var(--muted); margin-top: 2px; }
-  .sidebar-brand { border-bottom: 2px solid var(--viber); }
+    /* POLICY ALERT */
+    .policy-alert {
+      max-width: 960px; margin: 0 auto;
+      padding: 0 32px;
+      padding-top: 32px;
+    }
+    .alert-box {
+      background: var(--danger-bg);
+      border: 1px solid var(--danger-border);
+      border-left: 4px solid var(--danger);
+      border-radius: 0 10px 10px 0;
+      padding: 18px 20px;
+      display: flex; gap: 12px; align-items: flex-start;
+    }
+    .alert-icon { font-size: 20px; flex-shrink: 0; margin-top: 1px; }
+    .alert-body h4 { font-size: 14.5px; font-weight: 700; color: var(--danger); margin-bottom: 6px; }
+    .alert-body p { font-size: 13.5px; color: #6e1a1e; line-height: 1.6; }
+    .alert-body p strong { color: #6e1a1e; }
+    .alert-body ul { margin-top: 8px; list-style: none; display: flex; flex-direction: column; gap: 4px; }
+    .alert-body ul li { font-size: 13px; color: #6e1a1e; padding-left: 14px; position: relative; }
+    .alert-body ul li::before { content: "·"; position: absolute; left: 0; font-weight: 700; }
 
-  .sidebar-progress {
-    padding: 20px 24px 16px;
-    border-bottom: 1px solid var(--border);
-    background: #FAFAFA;
-  }
-  .progress-label { font-size: 11px; font-weight: 700; color: #9CA3AF; letter-spacing: 1px; text-transform: uppercase; margin-bottom: 10px; display: flex; justify-content: space-between; }
-  .progress-bar-bg { background: #E5E7EB; border-radius: 99px; height: 6px; overflow: hidden; }
-  .progress-bar-fill { height: 100%; border-radius: 99px; background: linear-gradient(90deg, var(--viber), var(--lime)); transition: width 0.5s cubic-bezier(0.4,0,0.2,1); }
-  .progress-pct { font-size: 18px; font-weight: 800; color: var(--dark); margin-top: 10px; }
-  .progress-pct span { font-size: 12px; font-weight: 400; color: #9CA3AF; }
+    /* MAIN */
+    .main { max-width: 960px; margin: 0 auto; padding: 0 32px; }
 
-  .sidebar-steps { padding: 16px 0; flex: 1; }
-  .sidebar-step {
-    display: flex;
-    align-items: flex-start;
-    gap: 12px;
-    padding: 12px 24px;
-    cursor: pointer;
-    transition: background 0.15s;
-    position: relative;
-  }
-  .sidebar-step:hover:not(.locked) { background: #F5F3FF; }
-  .sidebar-step.active { background: #F0EEFF; }
-  .sidebar-step.locked { cursor: not-allowed; opacity: 0.5; }
+    /* SECTIONS */
+    section { padding: 52px 0; border-top: 1px solid var(--border); }
+    .section-label { font-size: 11.5px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; color: var(--accent-dark); margin-bottom: 6px; }
+    .section-title { font-size: 24px; font-weight: 800; color: var(--text); margin-bottom: 6px; letter-spacing: -0.4px; }
+    .section-sub { color: var(--muted); font-size: 14.5px; margin-bottom: 28px; }
 
-  .step-indicator {
-    width: 28px; height: 28px;
-    border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 12px; font-weight: 700;
-    flex-shrink: 0;
-    transition: all 0.3s;
-    border: 2px solid var(--border);
-    color: var(--muted);
-    background: transparent;
-  }
-  .sidebar-step.active .step-indicator { border-color: var(--viber); color: var(--viber); background: var(--viber-glow); }
-  .sidebar-step.completed .step-indicator { border-color: var(--success); background: var(--success); color: var(--dark); }
-  .sidebar-step.locked .step-indicator { border-color: var(--locked); color: var(--locked); }
+    /* ABOUT VIBER */
+    .viber-summary {
+      background: var(--bg2); border: 1px solid var(--border); border-left: 4px solid var(--accent);
+      border-radius: 0 10px 10px 0; padding: 18px 20px;
+      font-size: 14.5px; color: var(--muted); line-height: 1.7; margin-bottom: 20px;
+      box-shadow: var(--shadow);
+    }
+    .viber-summary strong { color: var(--text); }
+    .viber-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    @media (max-width: 640px) { .viber-grid { grid-template-columns: 1fr; } }
+    .viber-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px; padding: 20px; box-shadow: var(--shadow); }
+    .viber-card h4 { font-size: 14px; font-weight: 700; color: var(--text); margin-bottom: 10px; }
+    .viber-card ul { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+    .viber-card ul li { font-size: 13.5px; color: var(--muted); padding-left: 16px; position: relative; }
+    .viber-card ul li::before { content: "•"; position: absolute; left: 0; color: var(--accent-dark); font-weight: 700; }
+    .viber-card ul li strong { color: var(--text); }
 
-  .step-info { flex: 1; min-width: 0; }
-  .step-info .step-num { font-size: 10px; font-weight: 700; color: #9CA3AF; letter-spacing: 0.5px; text-transform: uppercase; }
-  .step-info .step-name { font-size: 13px; font-weight: 600; color: var(--dark); margin-top: 1px; line-height: 1.3; }
-  .sidebar-step.locked .step-info .step-name { color: #9CA3AF; }
-  .step-lock-icon { font-size: 12px; color: var(--locked-text); margin-top: 8px; }
+    /* TEMPLATE RULES */
+    .rules-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 12px; margin-top: 8px; }
+    .rule-chip {
+      background: var(--bg2); border: 1px solid var(--border); border-radius: 10px;
+      padding: 14px 16px; box-shadow: var(--shadow);
+    }
+    .rule-chip .rule-icon { font-size: 18px; margin-bottom: 8px; }
+    .rule-chip h5 { font-size: 12.5px; font-weight: 700; color: var(--text); margin-bottom: 4px; }
+    .rule-chip p { font-size: 12px; color: var(--muted); line-height: 1.5; }
 
-  .sidebar-footer {
-    padding: 16px 24px;
-    border-top: 1px solid rgba(255,255,255,0.15);
-    font-size: 11px;
-    color: var(--muted);
-  }
-  .sidebar-footer a { color: var(--viber); text-decoration: none; }
+    /* PATH SELECTOR */
+    .path-selector { display: flex; gap: 16px; margin-bottom: 32px; flex-wrap: wrap; }
+    .path-card {
+      flex: 1; min-width: 240px;
+      background: var(--card-bg); border: 2px solid var(--border);
+      border-radius: 14px; padding: 20px; cursor: pointer;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      box-shadow: var(--shadow);
+    }
+    .path-card:hover { border-color: var(--accent); }
+    .path-card.active { border-color: var(--accent); background: var(--accent-bg); box-shadow: 0 0 0 3px rgba(115,96,242,0.1); }
+    .path-card .path-icon { font-size: 24px; margin-bottom: 10px; }
+    .path-card h4 { font-size: 15px; font-weight: 700; color: var(--text); margin-bottom: 4px; }
+    .path-card p { font-size: 13px; color: var(--muted); line-height: 1.5; }
+    .path-card ul { list-style: none; margin-top: 10px; display: flex; flex-direction: column; gap: 5px; }
+    .path-card ul li { font-size: 12.5px; color: var(--muted); padding-left: 14px; position: relative; }
+    .path-card ul li::before { content: "·"; position: absolute; left: 0; color: var(--accent-dark); font-weight: 700; }
 
-  /* ─── MAIN CONTENT ─── */
-  .main { margin-left: 280px; flex: 1; }
+    /* TAB CONTENT */
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
 
-  /* ─── HERO ─── */
-  .hero {
-    background: linear-gradient(135deg, #3A3A38 0%, #4A3A8A 60%, #7360F2 100%);
-    padding: 64px 56px 56px;
-    position: relative;
-    overflow: hidden;
-    border-bottom: 1px solid var(--border);
-  }
-  .hero::before {
-    content: '';
-    position: absolute;
-    top: -60px; right: -60px;
-    width: 300px; height: 300px;
-    background: radial-gradient(circle, rgba(115,96,242,0.3) 0%, transparent 70%);
-    pointer-events: none;
-  }
-  .hero::after {
-    content: '';
-    position: absolute;
-    bottom: -80px; left: 30%;
-    width: 200px; height: 200px;
-    background: radial-gradient(circle, rgba(201,220,80,0.15) 0%, transparent 70%);
-    pointer-events: none;
-  }
-  .hero-badge {
-    display: inline-flex; align-items: center; gap: 8px;
-    background: rgba(115,96,242,0.2);
-    border: 1px solid rgba(115,96,242,0.4);
-    color: #B8AFFF;
-    font-size: 12px; font-weight: 700;
-    padding: 6px 14px;
-    border-radius: 99px;
-    margin-bottom: 24px;
-    letter-spacing: 0.5px;
-  }
-  .hero h1 {
-    font-size: 44px; font-weight: 800;
-    line-height: 1.1;
-    letter-spacing: -1.5px;
-    margin-bottom: 16px;
-    color: var(--dark);
-  }
-  .hero h1 em { font-style: normal; color: var(--lime); }
-  .hero p { font-size: 17px; color: rgba(255,255,255,0.75); max-width: 560px; margin-bottom: 32px; line-height: 1.6; }
-  .hero-cta-row { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
-  .cta-start {
-    background: var(--viber); color: white;
-    font-size: 15px; font-weight: 700;
-    padding: 13px 28px; border-radius: var(--radius-sm);
-    border: none; cursor: pointer;
-    transition: background 0.15s, transform 0.1s;
-    display: inline-flex; align-items: center; gap: 8px;
-  }
-  .cta-start:hover { background: var(--viber-dark); transform: translateY(-1px); }
-  .cta-note { font-size: 13px; color: var(--muted); }
-  .hero-stats {
-    display: flex; gap: 36px; margin-top: 36px;
-    padding-top: 28px;
-    border-top: 1px solid rgba(255,255,255,0.15);
-    flex-wrap: wrap;
-  }
-  .hero-stat .val { font-size: 24px; font-weight: 800; color: var(--lime); }
-  .hero-stat .lbl { font-size: 12px; color: rgba(255,255,255,0.6); margin-top: 2px; }
+    /* PREREQ */
+    .prereq-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    @media (max-width: 640px) { .prereq-grid { grid-template-columns: 1fr; } }
+    .prereq-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px; padding: 20px; box-shadow: var(--shadow); }
+    .prereq-card .icon { font-size: 22px; margin-bottom: 10px; }
+    .prereq-card h4 { font-size: 14px; font-weight: 700; color: var(--text); margin-bottom: 14px; }
 
-  /* ─── STEP PAGES ─── */
-  .step-page { display: none; padding: 48px 56px; }
-  .step-page.active { display: block; animation: fadeIn 0.3s ease; }
-  @keyframes fadeIn { from { opacity:0; transform:translateY(8px); } to { opacity:1; transform:translateY(0); } }
+    /* INTERACTIVE CHECKLIST */
+    .check-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+    .check-list li { display: flex; align-items: flex-start; gap: 10px; cursor: pointer; user-select: none; }
+    .check-list li .cb-box {
+      width: 18px; height: 18px; min-width: 18px;
+      border: 1.5px solid var(--border); border-radius: 5px;
+      margin-top: 2px; display: flex; align-items: center; justify-content: center;
+      transition: all 0.15s; background: var(--bg2);
+    }
+    .check-list li .cb-box svg { display: none; width: 11px; height: 11px; }
+    .check-list li .cb-label { font-size: 13.5px; color: var(--muted); line-height: 1.5; transition: color 0.15s; }
+    .check-list li .cb-label strong { color: var(--text); }
+    .check-list li.checked .cb-box { background: var(--accent); border-color: var(--accent); }
+    .check-list li.checked .cb-box svg { display: block; }
+    .check-list li.checked .cb-label { color: #adb5bd; text-decoration: line-through; text-decoration-color: #c8d0d8; }
+    .check-list li:hover .cb-box { border-color: var(--accent); }
 
-  .page-eyebrow {
-    font-size: 11px; font-weight: 700; letter-spacing: 2px;
-    text-transform: uppercase; color: var(--viber);
-    margin-bottom: 8px;
-    display: flex; align-items: center; gap: 8px;
-  }
-  .page-eyebrow::before { content: ''; width: 20px; height: 2px; background: var(--viber); border-radius: 1px; display: inline-block; }
-  .page-title { font-size: 32px; font-weight: 800; letter-spacing: -0.5px; margin-bottom: 8px; color: var(--dark); }
-  .page-sub { font-size: 16px; color: #6B7280; margin-bottom: 40px; max-width: 600px; line-height: 1.6; }
+    .warn-box { background: var(--warn-bg); border: 1px solid var(--warn-border); border-radius: 10px; padding: 14px 16px; font-size: 13.5px; color: var(--warn); margin-top: 4px; display: flex; gap: 8px; align-items: flex-start; line-height: 1.5; grid-column: 1 / -1; }
+    .info-box { background: var(--info-bg); border: 1px solid var(--info-border); border-radius: 10px; padding: 14px 16px; font-size: 13.5px; color: var(--info); margin-top: 4px; display: flex; gap: 8px; align-items: flex-start; line-height: 1.5; grid-column: 1 / -1; }
 
-  /* ─── CHECKLIST GROUPS ─── */
-  .checklist-group { margin-bottom: 28px; }
-  .checklist-group-title {
-    font-size: 13px; font-weight: 700;
-    color: #374151;
-    letter-spacing: 0.5px;
-    text-transform: uppercase;
-    margin-bottom: 12px;
-    display: flex; align-items: center; gap: 8px;
-  }
-  .checklist-group-title .group-icon {
-    width: 28px; height: 28px;
-    border-radius: 8px;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 14px;
-    background: #F9FAFB;
-  }
-  .checklist-group-title .group-count {
-    margin-left: auto;
-    font-size: 11px;
-    font-weight: 700;
-    color: var(--muted);
-    background: #EEF2FF;
-    color: var(--viber);
-    padding: 2px 8px;
-    border-radius: 99px;
-  }
+    /* STEPS */
+    .step-list { display: flex; flex-direction: column; gap: 10px; }
+    .step-item { background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px; padding: 18px 20px; display: flex; gap: 16px; align-items: flex-start; box-shadow: var(--shadow); }
+    .step-num { width: 32px; height: 32px; min-width: 32px; background: var(--accent-bg); border: 1.5px solid var(--accent-border); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 800; color: var(--accent-dark); }
+    .step-body { flex: 1; }
+    .step-body .party { font-size: 11px; font-weight: 700; letter-spacing: 0.5px; text-transform: uppercase; color: var(--muted); margin-bottom: 4px; }
+    .step-body h4 { font-size: 14.5px; font-weight: 700; color: var(--text); margin-bottom: 6px; }
+    .step-body p, .step-body li { font-size: 13.5px; color: var(--muted); line-height: 1.6; }
+    .step-body ul { list-style: none; margin-top: 6px; display: flex; flex-direction: column; gap: 4px; }
+    .step-body ul li { padding-left: 14px; position: relative; }
+    .step-body ul li::before { content: "·"; position: absolute; left: 0; color: var(--accent-dark); font-weight: 700; }
+    .step-body ul li strong { color: var(--text); }
+    .step-tag { display: inline-block; font-size: 11px; font-weight: 600; padding: 2px 8px; border-radius: 4px; margin-top: 8px; }
+    .tag-8x8 { background: #dbeafe; color: #1d4ed8; border: 1px solid #93c5fd; }
+    .tag-viber { background: var(--accent-bg); color: var(--accent-dark); border: 1px solid var(--accent-border); }
+    .tag-client { background: var(--bg3); color: var(--muted); border: 1px solid var(--border); }
+    .step-note { margin-top: 10px; background: var(--warn-bg); border-left: 3px solid var(--warn-border); border-radius: 0 6px 6px 0; padding: 8px 12px; font-size: 12.5px; color: var(--warn); }
+    .step-note-info { margin-top: 10px; background: var(--info-bg); border-left: 3px solid var(--info-border); border-radius: 0 6px 6px 0; padding: 8px 12px; font-size: 12.5px; color: var(--info); }
+    .step-note-green { margin-top: 10px; background: var(--green-bg); border-left: 3px solid var(--green-border); border-radius: 0 6px 6px 0; padding: 8px 12px; font-size: 12.5px; color: var(--green); }
+    a { color: var(--accent-dark); }
+    a:hover { text-decoration: underline; }
+    .phase-divider { height: 1px; background: var(--border); margin: 28px 0; }
 
-  /* ─── CHECKBOX ITEMS ─── */
-  .check-item {
-    display: flex; align-items: flex-start; gap: 14px;
-    background: #FAFAFA;
-    border: 1px solid var(--border);
-    border-radius: var(--radius-sm);
-    padding: 14px 16px;
-    margin-bottom: 8px;
-    cursor: pointer;
-    transition: all 0.2s;
-    position: relative;
-    user-select: none;
-  }
-  .check-item:hover { background: var(--viber-light); border-color: var(--border-viber); }
-  .check-item.checked {
-    background: var(--success-bg);
-    border-color: var(--success-border);
-  }
-  .check-item input[type="checkbox"] { display: none; }
-  .check-box {
-    width: 22px; height: 22px;
-    border-radius: 6px;
-    border: 2px solid #D1D5DB;
-    background: #FFFFFF;
-    display: flex; align-items: center; justify-content: center;
-    flex-shrink: 0;
-    margin-top: 1px;
-    transition: all 0.2s;
-    font-size: 13px;
-  }
-  .check-item.checked .check-box {
-    background: var(--success);
-    border-color: var(--success);
-  }
-  .check-body { flex: 1; }
-  .check-label { font-size: 14px; font-weight: 600; color: var(--dark); line-height: 1.4; }
-  .check-item.checked .check-label { color: #9CA3AF; text-decoration: line-through; }
-  .check-desc { font-size: 12px; color: var(--muted); margin-top: 3px; line-height: 1.5; }
-  .check-item.checked .check-desc { color: #D1D5DB; }
-  .check-tag {
-    font-size: 10px; font-weight: 700;
-    padding: 2px 8px; border-radius: 99px;
-    flex-shrink: 0; margin-top: 2px;
-    text-transform: uppercase; letter-spacing: 0.3px;
-  }
-  .tag-must { background: rgba(239,68,68,0.15); color: #F87171; border: 1px solid rgba(239,68,68,0.3); }
-  .tag-cond { background: rgba(251,191,36,0.12); color: var(--warn); border: 1px solid rgba(251,191,36,0.25); }
+    /* COMPARE TABLE */
+    .compare-table { width: 100%; border-collapse: collapse; font-size: 13.5px; margin-top: 8px; }
+    .compare-table th { background: var(--bg3); font-weight: 700; font-size: 12px; text-transform: uppercase; letter-spacing: 0.4px; color: var(--muted); padding: 10px 14px; text-align: left; border: 1px solid var(--border); }
+    .compare-table td { padding: 10px 14px; border: 1px solid var(--border); color: var(--muted); vertical-align: top; background: var(--bg2); }
+    .compare-table tr:hover td { background: var(--bg3); }
+    .compare-table td:first-child { font-weight: 600; color: var(--text); }
+    .badge-yes { display: inline-block; background: var(--green-bg); color: var(--green); border: 1px solid var(--green-border); border-radius: 4px; font-size: 11px; font-weight: 700; padding: 2px 7px; }
+    .badge-req { display: inline-block; background: var(--warn-bg); color: var(--warn); border: 1px solid var(--warn-border); border-radius: 4px; font-size: 11px; font-weight: 700; padding: 2px 7px; }
+    .badge-new { display: inline-block; background: var(--info-bg); color: var(--info); border: 1px solid var(--info-border); border-radius: 4px; font-size: 11px; font-weight: 700; padding: 2px 7px; }
 
-  /* ─── GATE BANNER ─── */
-  .gate-banner {
-    background: linear-gradient(135deg, rgba(115,96,242,0.06), rgba(115,96,242,0.02));
-    border: 1.5px solid rgba(115,96,242,0.25);
-    border-radius: var(--radius);
-    padding: 28px 32px;
-    margin-top: 36px;
-    text-align: center;
-  }
-  .gate-banner.unlocked {
-    background: linear-gradient(135deg, #F0FDF4, #ECFDF5);
-    border-color: #86EFAC;
-  }
-  .gate-banner h3 { font-size: 18px; font-weight: 700; margin-bottom: 8px; color: var(--dark); }
-  .gate-banner p { font-size: 14px; color: #6B7280; margin-bottom: 20px; }
-  .gate-items {
-    display: flex; gap: 8px; justify-content: center;
-    flex-wrap: wrap; margin-bottom: 20px;
-  }
-  .gate-item {
-    display: flex; align-items: center; gap: 6px;
-    font-size: 12px; font-weight: 600;
-    padding: 5px 12px; border-radius: 99px;
-    background: #F9FAFB; border: 1px solid var(--border);
-    color: var(--muted);
-    transition: all 0.3s;
-  }
-  .gate-item.done { background: var(--success-bg); border-color: rgba(74,222,128,0.3); color: var(--success); }
-  .gate-item .gi-dot { width: 7px; height: 7px; border-radius: 50%; background: currentColor; }
-  .btn-next {
-    background: var(--viber); color: white;
-    font-size: 15px; font-weight: 700;
-    padding: 13px 32px; border-radius: var(--radius-sm);
-    border: none; cursor: pointer;
-    transition: all 0.2s;
-    display: inline-flex; align-items: center; gap: 8px;
-  }
-  .btn-next:hover:not(:disabled) { background: var(--viber-dark); transform: translateY(-1px); }
-  .btn-next:disabled {
-    background: var(--locked); color: var(--locked-text);
-    cursor: not-allowed; transform: none;
-  }
-  .btn-back {
-    background: #F9FAFB; color: #374151;
-    font-size: 14px; font-weight: 600;
-    padding: 13px 20px; border-radius: var(--radius-sm);
-    border: 1px solid var(--border); cursor: pointer;
-    transition: all 0.2s;
-    display: inline-flex; align-items: center; gap: 8px;
-  }
-  .btn-back:hover { border-color: rgba(255,255,255,0.2); color: var(--white); }
-  .nav-row { display: flex; gap: 12px; align-items: center; margin-top: 12px; }
+    /* CHECKLIST SECTION */
+    .checklist-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    @media (max-width: 640px) { .checklist-grid { grid-template-columns: 1fr; } }
+    .checklist-section { background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px; padding: 20px; box-shadow: var(--shadow); }
+    .checklist-section h4 { font-size: 12px; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 14px; padding-bottom: 10px; border-bottom: 1px solid var(--border); }
+    .progress-label { font-size: 12.5px; color: var(--muted); margin-bottom: 8px; display: flex; justify-content: space-between; }
+    .progress-label span { font-weight: 600; color: var(--accent-dark); }
+    .progress-bar-wrap { background: var(--bg3); border-radius: 99px; height: 6px; margin-bottom: 24px; overflow: hidden; }
+    .progress-bar { height: 100%; background: var(--accent); border-radius: 99px; transition: width 0.3s ease; width: 0%; }
 
-  /* ─── LOCKED STATE ─── */
-  .locked-overlay {
-    background: #FFFFFF;
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 64px 40px;
-    text-align: center;
-  }
-  .locked-icon { font-size: 48px; margin-bottom: 20px; opacity: 0.5; }
-  .locked-overlay h3 { font-size: 20px; font-weight: 700; margin-bottom: 8px; color: #9CA3AF; }
-  .locked-overlay p { font-size: 14px; color: #9CA3AF; max-width: 380px; margin: 0 auto 24px; }
-  .locked-reqs {
-    display: flex; flex-wrap: wrap; gap: 8px;
-    justify-content: center; margin-bottom: 24px;
-  }
-  .locked-req {
-    font-size: 12px; font-weight: 600;
-    padding: 6px 14px; border-radius: 99px;
-    background: #F9FAFB; border: 1px solid var(--border);
-    color: #9CA3AF;
-  }
+    /* RESOURCES */
+    .resources-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 16px; }
+    .resource-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 12px; padding: 20px; text-decoration: none; display: block; transition: border-color 0.15s, box-shadow 0.15s; box-shadow: var(--shadow); }
+    .resource-card:hover { border-color: var(--accent); box-shadow: 0 4px 12px rgba(115,96,242,0.12); text-decoration: none; }
+    .resource-card .res-tag { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; color: var(--accent-dark); margin-bottom: 8px; }
+    .resource-card h4 { font-size: 14px; font-weight: 700; color: var(--text); margin-bottom: 6px; }
+    .resource-card p { font-size: 12.5px; color: var(--muted); line-height: 1.5; }
+    .resource-card .arrow { font-size: 12px; color: var(--accent-dark); margin-top: 12px; display: block; }
 
-  /* ─── STEP CONTENT CARDS ─── */
-  .content-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 32px; }
-  @media (max-width: 900px) { .content-grid { grid-template-columns: 1fr; } }
-  .content-card {
-    background: #FFFFFF;
-    border: 1px solid var(--border);
-    border-radius: var(--radius);
-    padding: 24px;
-    box-shadow: 0 1px 4px rgba(0,0,0,0.05);
-  }
-  .content-card-icon { font-size: 24px; margin-bottom: 12px; }
-  .content-card h4 { font-size: 15px; font-weight: 700; margin-bottom: 6px; color: var(--dark); }
-  .content-card p { font-size: 13px; color: var(--muted); line-height: 1.6; }
+    /* CTA */
+    .cta-wrap { background: linear-gradient(135deg, #f0eeff 0%, #f6f8fa 100%); border-top: 1px solid var(--border); }
+    .cta-block { text-align: center; padding: 56px 32px; max-width: 960px; margin: 0 auto; }
+    .cta-block h2 { font-size: 24px; font-weight: 800; color: var(--text); margin-bottom: 8px; }
+    .cta-block p { color: var(--muted); margin-bottom: 24px; }
+    .cta-btn { display: inline-block; background: var(--accent); color: #fff; font-weight: 700; font-size: 14px; padding: 12px 28px; border-radius: 8px; text-decoration: none; margin: 6px; transition: background 0.15s; }
+    .cta-btn:hover { background: var(--accent-dark); text-decoration: none; color: #fff; }
+    .cta-btn.outline { background: var(--bg2); color: var(--text); border: 1px solid var(--border); }
+    .cta-btn.outline:hover { border-color: var(--text); background: var(--bg3); }
 
-  /* ─── TIMELINE VISUAL ─── */
-  .timeline-wrap { margin: 32px 0; }
-  .tl-item {
-    display: flex; gap: 20px;
-    margin-bottom: 24px;
-    position: relative;
-  }
-  .tl-item:not(:last-child)::after {
-    content: '';
-    position: absolute;
-    left: 19px; top: 44px; bottom: -24px;
-    width: 2px;
-    background: linear-gradient(to bottom, var(--viber), transparent);
-  }
-  .tl-left { flex-shrink: 0; }
-  .tl-dot {
-    width: 40px; height: 40px;
-    border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    font-size: 14px; font-weight: 800;
-    border: 2px solid var(--viber);
-    color: var(--viber);
-    background: var(--viber-light, #F0EEFF);
-  }
-  .tl-dot.done { background: var(--success); border-color: var(--success); color: var(--dark); }
-  .tl-body {
-    flex: 1;
-    background: #FFFFFF;
-    border: 1px solid var(--border);
-    border-radius: var(--radius-sm);
-    padding: 16px 20px;
-    margin-top: 4px;
-  }
-  .tl-body h4 { font-size: 14px; font-weight: 700; margin-bottom: 4px; color: var(--dark); }
-  .tl-body p { font-size: 13px; color: var(--muted); }
-  .tl-meta { display: flex; gap: 8px; margin-top: 10px; flex-wrap: wrap; }
-  .tl-badge {
-    font-size: 11px; font-weight: 700;
-    padding: 3px 10px; border-radius: 99px;
-  }
-  .badge-time { background: #EEF2FF; color: #4338CA; }
-  .badge-owner { background: #F0FAFA; color: #0F766E; }
-  .badge-warn { background: #FFFBEB; color: #92400E; }
-
-  /* ─── DOCS TABLE ─── */
-  .doc-table { width: 100%; border-collapse: collapse; margin-bottom: 24px; }
-  .doc-table th {
-    font-size: 11px; font-weight: 700; letter-spacing: 1px; text-transform: uppercase;
-    color: var(--muted); padding: 12px 16px; text-align: left;
-    background: #F9FAFB;
-    border-bottom: 1px solid var(--border);
-  }
-  .doc-table td {
-    padding: 14px 16px; font-size: 13px;
-    border-bottom: 1px solid #F3F4F6;
-    vertical-align: top;
-  }
-  .doc-table tr:hover td { background: #FAFAFA; }
-  .doc-name { font-weight: 600; color: var(--dark); margin-bottom: 3px; }
-  .doc-detail { font-size: 12px; color: #6B7280; margin-top:3px; }
-
-  /* ─── ALERT ─── */
-  .alert {
-    border-radius: var(--radius-sm);
-    padding: 14px 16px;
-    margin: 16px 0;
-    font-size: 13px;
-    display: flex; gap: 10px; align-items: flex-start;
-    line-height: 1.6;
-  }
-  .alert-warn { background: var(--warn-bg); border: 1px solid var(--warn-border); color: #92400E; }
-  .alert-info { background: #F5F3FF; border: 1px solid rgba(115,96,242,0.25); color: #5B21B6; }
-  .alert-ok { background: var(--success-bg); border: 1px solid var(--success-border); color: #166534; }
-
-  /* ─── COMPLETE STATE ─── */
-  .complete-wrap { text-align: center; padding: 48px 40px; }
-  .complete-icon { font-size: 64px; margin-bottom: 24px; display: block; }
-  .complete-wrap h2 { font-size: 32px; font-weight: 800; margin-bottom: 12px; color: var(--viber); }
-  .complete-wrap p { font-size: 16px; color: #6B7280; max-width: 500px; margin: 0 auto 32px; }
-  .complete-actions { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
-  .btn-complete {
-    background: var(--lime); color: var(--dark);
-    font-size: 14px; font-weight: 700;
-    padding: 12px 24px; border-radius: var(--radius-sm);
-    border: none; cursor: pointer; text-decoration: none;
-    display: inline-flex; align-items: center; gap: 8px;
-  }
-  .btn-outline {
-    background: transparent; color: var(--dark);
-    font-size: 14px; font-weight: 700;
-    padding: 12px 24px; border-radius: var(--radius-sm);
-    border: 1px solid var(--border); cursor: pointer; text-decoration: none;
-    display: inline-flex; align-items: center; gap: 8px;
-    transition: border-color 0.15s;
-  }
-  .btn-outline:hover { border-color: rgba(255,255,255,0.3); }
-
-  /* ─── MOBILE ─── */
-  @media (max-width: 768px) {
-    .sidebar { display: none; }
-    .main { margin-left: 0; }
-    .hero { padding: 40px 24px; }
-    .hero h1 { font-size: 30px; }
-    .step-page { padding: 32px 24px; }
-  }
-</style>
+    /* FOOTER */
+    footer { border-top: 1px solid var(--border); padding: 24px 32px; text-align: center; font-size: 12.5px; color: var(--muted); background: var(--bg2); }
+  </style>
 </head>
 <body>
-<div class="app">
 
-<!-- ═══════════ SIDEBAR ═══════════ -->
-<aside class="sidebar">
-  <div class="sidebar-brand">
-    <div class="logo">8x8 ®</div>
-    <div class="product">Viber for Business · Onboarding</div>
-  </div>
-  <div class="sidebar-progress">
-    <div class="progress-label">
-      <span>Your Progress</span>
-      <span id="pct-label">0%</span>
-    </div>
-    <div class="progress-bar-bg">
-      <div class="progress-bar-fill" id="progress-fill" style="width:0%"></div>
-    </div>
-    <div class="progress-pct" id="progress-num">0% <span>complete</span></div>
-  </div>
-  <nav class="sidebar-steps">
-    <div class="sidebar-step active" id="nav-0" onclick="goToStep(0)">
-      <div class="step-indicator">1</div>
-      <div class="step-info">
-        <div class="step-num">Step 1</div>
-        <div class="step-name">Prerequisites Checklist</div>
-      </div>
-    </div>
-    <div class="sidebar-step locked" id="nav-1" onclick="goToStep(1)">
-      <div class="step-indicator">🔒</div>
-      <div class="step-info">
-        <div class="step-num">Step 2</div>
-        <div class="step-name">Required Documents</div>
-      </div>
-    </div>
-    <div class="sidebar-step locked" id="nav-2" onclick="goToStep(2)">
-      <div class="step-indicator">🔒</div>
-      <div class="step-info">
-        <div class="step-num">Step 3</div>
-        <div class="step-name">Onboarding Timeline</div>
-      </div>
-    </div>
-    <div class="sidebar-step locked" id="nav-3" onclick="goToStep(3)">
-      <div class="step-indicator">🔒</div>
-      <div class="step-info">
-        <div class="step-num">Step 4</div>
-        <div class="step-name">Setup Steps</div>
-      </div>
-    </div>
-    <div class="sidebar-step locked" id="nav-4" onclick="goToStep(4)">
-      <div class="step-indicator">🔒</div>
-      <div class="step-info">
-        <div class="step-num">Step 5</div>
-        <div class="step-name">FAQ & Resources</div>
-      </div>
-    </div>
-  </nav>
-  <div class="sidebar-footer">
-    Need help? <a href="mailto:cpaas-support@8x8.com">cpaas-support@8x8.com</a><br>
-    © 2026 8x8, Inc. All rights reserved.
-  </div>
-</aside>
+<!-- NAV -->
+<nav>
+  <a class="nav-brand" href="#">8x8 <span>×</span> Viber</a>
+  <ul>
+    <li><a href="#about">About Viber</a></li>
+    <li><a href="#templates">Template Policy</a></li>
+    <li><a href="#path">Choose Path</a></li>
+    <li><a href="#prereq">Prerequisites</a></li>
+    <li><a href="#steps">Steps</a></li>
+    <li><a href="#checklist">Checklist</a></li>
+    <li><a href="#resources">Resources</a></li>
+  </ul>
+</nav>
 
-<!-- ═══════════ MAIN ═══════════ -->
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-inner">
+    <div class="hero-badge">● Viber Business Messaging</div>
+    <h1>Go live on <strong>Viber</strong><br>with 8x8</h1>
+    <p>Your complete onboarding guide — whether you're setting up a new Viber Business account or migrating an existing one to 8x8.</p>
+    <div class="stats">
+      <div class="stat">
+        <div class="num">2<span>+</span></div>
+        <div class="label">Setup Paths</div>
+      </div>
+      <div class="stat">
+        <div class="num"><span>~</span>48h</div>
+        <div class="label">Account Approval</div>
+      </div>
+      <div class="stat">
+        <div class="num">24h</div>
+        <div class="label">Template Review</div>
+      </div>
+      <div class="stat">
+        <div class="num">2<span>K</span></div>
+        <div class="label">Templates / Account</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- POLICY ALERT -->
+<div class="policy-alert">
+  <div class="alert-box">
+    <div class="alert-icon">🚨</div>
+    <div class="alert-body">
+      <h4>Important Policy Change — Effective July 15, 2026</h4>
+      <p>Viber now requires all <strong>transactional and OTP messages</strong> to use <strong>pre-approved message templates</strong>. Sending free-text transactional messages is no longer allowed. Key impacts:</p>
+      <ul>
+        <li>All OTP (one-time password) messages <strong>must use an approved OTP template</strong> containing a <code>{{pin}}</code> variable — otherwise messages may be charged at the higher Promotional rate</li>
+        <li>All order confirmations, shipping updates, account notifications must use an approved Transactional template</li>
+        <li>Templates require Viber human review — approval takes <strong>up to 24 hours</strong></li>
+        <li>Any change to a template requires full resubmission and a new 24-hour review cycle</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
 <div class="main">
 
-  <!-- HERO -->
-  <div class="hero" id="top">
-    <div class="hero-badge">Viber for Business · 8x8 CPaaS</div>
-    <h1>Get live on Viber<br><em>with 8x8.</em></h1>
-    <p>Complete the prerequisites checklist to unlock your onboarding steps. Each section opens once you've confirmed you're ready.</p>
-    <div class="hero-cta-row">
-      <button class="cta-start" onclick="goToStep(0)">▶ Start Checklist</button>
-      <span class="cta-note">Takes about 5 minutes</span>
+<!-- ABOUT VIBER -->
+<section id="about">
+  <div class="section-label">What is Viber?</div>
+  <div class="section-title">Viber Business Messaging</div>
+  <div class="viber-summary">
+    <strong>Viber</strong> is a messaging and calling platform with over 1 billion registered users, widely used across Southeast Asia, Eastern Europe, and the Middle East. For businesses, Viber offers <strong>Business Messaging</strong> through verified Official Accounts — allowing brands to send authenticated, transactional notifications directly to customers inside the Viber app.
+    <br><br>
+    Messages are sent via a dedicated Business Account (identified by a Service ID), and are displayed with your business name and logo. Viber Business Messaging is ideal for <strong>transactional notifications and OTP delivery</strong> — not promotional campaigns. As of July 2026, all transactional messages must use pre-approved templates registered with Viber.
+  </div>
+  <div class="viber-grid">
+    <div class="viber-card">
+      <h4>✅ What Viber Business is for</h4>
+      <ul>
+        <li>OTP / one-time password delivery</li>
+        <li>Order confirmations & shipping updates</li>
+        <li>Payment and transaction alerts</li>
+        <li>Account notifications & security alerts</li>
+        <li>Appointment reminders</li>
+        <li>Service status notifications</li>
+      </ul>
     </div>
-    <div class="hero-stats">
-      <div class="hero-stat"><div class="val">5–10</div><div class="lbl">Business days for<br>sender approval</div></div>
-      <div class="hero-stat"><div class="val">3</div><div class="lbl">Documents<br>required</div></div>
-      <div class="hero-stat"><div class="val">2–3</div><div class="lbl">Weeks to<br>go-live</div></div>
-      <div class="hero-stat"><div class="val">1-way</div><div class="lbl">or 2-way<br>messaging</div></div>
+    <div class="viber-card">
+      <h4>💡 Key advantages</h4>
+      <ul>
+        <li><strong>Rich message display</strong> — business name, logo, and verified badge visible to recipients</li>
+        <li><strong>OTP Copy button</strong> — OTP templates show a native copy-to-clipboard button</li>
+        <li><strong>Two-way messaging</strong> — optional for customer support flows</li>
+        <li><strong>High deliverability</strong> — direct integration, no carrier routing</li>
+        <li><strong>Multi-language support</strong> — separate template per language</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- TEMPLATE POLICY -->
+<section id="templates">
+  <div class="section-label">New Policy</div>
+  <div class="section-title">Viber Message Templates</div>
+  <div class="section-sub">All transactional and OTP messages must now use pre-approved templates. Here's what you need to know before designing your templates.</div>
+
+  <div class="rules-grid">
+    <div class="rule-chip">
+      <div class="rule-icon">📝</div>
+      <h5>Two Template Categories</h5>
+      <p><strong>OTP</strong> — for one-time passwords. Must include <code>{{pin}}</code> variable. Shows a native Copy button in Viber app.<br><strong>Transactional</strong> — for order updates, alerts, notifications.</p>
+    </div>
+    <div class="rule-chip">
+      <div class="rule-icon">✏️</div>
+      <h5>Body Rules</h5>
+      <p>1–875 characters. Must <strong>start and end with static text</strong> (not a variable). No two variables next to each other without text between them.</p>
+    </div>
+    <div class="rule-chip">
+      <div class="rule-icon">🔢</div>
+      <h5>Variables</h5>
+      <p>Max <strong>5 variables</strong> per template. Variable names: English only, max 50 characters. No URLs allowed inside variable values at send time.</p>
+    </div>
+    <div class="rule-chip">
+      <div class="rule-icon">🌐</div>
+      <h5>One Language Per Template</h5>
+      <p>Each template supports <strong>one language only</strong>. To support multiple languages (e.g. English + Thai), submit separate templates for each.</p>
+    </div>
+    <div class="rule-chip">
+      <div class="rule-icon">⏱️</div>
+      <h5>Approval Time</h5>
+      <p>Viber human moderators review each template. Standard approval takes <strong>up to 24 hours</strong>. Plan accordingly before go-live.</p>
+    </div>
+    <div class="rule-chip">
+      <div class="rule-icon">🔒</div>
+      <h5>Templates Are Immutable</h5>
+      <p>Once approved, templates <strong>cannot be edited</strong>. Any change requires deleting the template and resubmitting — starting a new 24-hour review cycle.</p>
     </div>
   </div>
 
-  <!-- ════ STEP 0: PREREQUISITES CHECKLIST ════ -->
-  <div class="step-page active" id="page-0">
-    <div class="page-eyebrow">Step 1 of 5</div>
-    <div class="page-title">Prerequisites Checklist</div>
-    <div class="page-sub">Check off everything you have ready. You need to complete all required items before proceeding to the next step.</div>
-
-    <!-- GROUP 1: Business Info -->
-    <div class="checklist-group">
-      <div class="checklist-group-title">
-        <div class="group-icon">🏢</div>
-        Business Information
-        <span class="group-count" id="g0-count">0 / 8</span>
-      </div>
-
-      <div class="check-item" onclick="toggle(this)" data-group="0" data-required="true">
-        <input type="checkbox"><div class="check-box"></div>
-        <div class="check-body">
-          <div class="check-label">Company / Brand Name</div>
-          <div class="check-desc">Your business name as it will appear publicly on the Viber sender profile. Must match your registration documents.</div>
-        </div>
-        <span class="check-tag tag-must">Required</span>
-      </div>
-      <div class="check-item" onclick="toggle(this)" data-group="0" data-required="true">
-        <input type="checkbox"><div class="check-box"></div>
-        <div class="check-body">
-          <div class="check-label">Legal Company Name</div>
-          <div class="check-desc">Full legal name exactly as it appears on your business license / registration certificate.</div>
-        </div>
-        <span class="check-tag tag-must">Required</span>
-      </div>
-      <div class="check-item" onclick="toggle(this)" data-group="0" data-required="true">
-        <input type="checkbox"><div class="check-box"></div>
-        <div class="check-body">
-          <div class="check-label">Full Business Address</div>
-          <div class="check-desc">Street, city, country — as it appears on your official registration document or business permit.</div>
-        </div>
-        <span class="check-tag tag-must">Required</span>
-      </div>
-      <div class="check-item" onclick="toggle(this)" data-group="0" data-required="true">
-        <input type="checkbox"><div class="check-box"></div>
-        <div class="check-body">
-          <div class="check-label">Business Phone Number</div>
-          <div class="check-desc">Official business contact number — for the Viber sender profile, not a personal number.</div>
-        </div>
-        <span class="check-tag tag-must">Required</span>
-      </div>
-      <div class="check-item" onclick="toggle(this)" data-group="0" data-required="true">
-        <input type="checkbox"><div class="check-box"></div>
-        <div class="check-body">
-          <div class="check-label">Business Website URL</div>
-          <div class="check-desc">Your official company website (e.g. https://yourcompany.com). Required by Viber for verification.</div>
-        </div>
-        <span class="check-tag tag-must">Required</span>
-      </div>
-      <div class="check-item" onclick="toggle(this)" data-group="0" data-required="true">
-        <input type="checkbox"><div class="check-box"></div>
-        <div class="check-body">
-          <div class="check-label">Business Category</div>
-          <div class="check-desc">E.g. Financial Institution, E-Commerce, Healthcare, Retail, IT & Internet, Transportation, Education, etc.</div>
-        </div>
-        <span class="check-tag tag-must">Required</span>
-      </div>
-      <div class="check-item" onclick="toggle(this)" data-group="0" data-required="true">
-        <input type="checkbox"><div class="check-box"></div>
-        <div class="check-body">
-          <div class="check-label">Registered Country & Business Launch Date</div>
-          <div class="check-desc">Country of legal incorporation and the date your business officially started operations.</div>
-        </div>
-        <span class="check-tag tag-must">Required</span>
-      </div>
-      <div class="check-item" onclick="toggle(this)" data-group="0" data-required="true">
-        <input type="checkbox"><div class="check-box"></div>
-        <div class="check-body">
-          <div class="check-label">Profile Description (2–3 sentences)</div>
-          <div class="check-desc">A brief description of your business that will be visible to Viber users on your sender profile page.</div>
-        </div>
-        <span class="check-tag tag-must">Required</span>
-      </div>
-    </div>
-
-    <!-- GROUP 2: Logo Assets -->
-    <div class="checklist-group">
-      <div class="checklist-group-title">
-        <div class="group-icon">🖼️</div>
-        Logo Assets — PNG Only (All 5 Sizes)
-        <span class="group-count" id="g1-count">0 / 5</span>
-      </div>
-      <div class="alert alert-warn">⚠️ &nbsp;All 5 sizes are mandatory. PNG format only — JPG and SVG are not accepted by Viber.</div>
-
-      <div class="check-item" onclick="toggle(this)" data-group="1" data-required="true">
-        <input type="checkbox"><div class="check-box"></div>
-        <div class="check-body"><div class="check-label">Logo PNG — 50 × 50 px</div></div>
-        <span class="check-tag tag-must">Required</span>
-      </div>
-      <div class="check-item" onclick="toggle(this)" data-group="1" data-required="true">
-        <input type="checkbox"><div class="check-box"></div>
-        <div class="check-body"><div class="check-label">Logo PNG — 65 × 65 px</div></div>
-        <span class="check-tag tag-must">Required</span>
-      </div>
-      <div class="check-item" onclick="toggle(this)" data-group="1" data-required="true">
-        <input type="checkbox"><div class="check-box"></div>
-        <div class="check-body"><div class="check-label">Logo PNG — 100 × 100 px</div></div>
-        <span class="check-tag tag-must">Required</span>
-      </div>
-      <div class="check-item" onclick="toggle(this)" data-group="1" data-required="true">
-        <input type="checkbox"><div class="check-box"></div>
-        <div class="check-body"><div class="check-label">Logo PNG — 130 × 130 px</div></div>
-        <span class="check-tag tag-must">Required</span>
-      </div>
-      <div class="check-item" onclick="toggle(this)" data-group="1" data-required="true">
-        <input type="checkbox"><div class="check-box"></div>
-        <div class="check-body"><div class="check-label">Logo PNG — 360 × 280 px</div></div>
-        <span class="check-tag tag-must">Required</span>
-      </div>
-    </div>
-
-    <!-- GROUP 3: Messaging Config -->
-    <div class="checklist-group">
-      <div class="checklist-group-title">
-        <div class="group-icon">💬</div>
-        Messaging Configuration
-        <span class="group-count" id="g2-count">0 / 4</span>
-      </div>
-
-      <div class="check-item" onclick="toggle(this)" data-group="2" data-required="true">
-        <input type="checkbox"><div class="check-box"></div>
-        <div class="check-body">
-          <div class="check-label">Account Type confirmed — 1-way or 2-way</div>
-          <div class="check-desc">1-way = outbound only (OTP, alerts, notifications). 2-way = conversational, customers can reply.</div>
-        </div>
-        <span class="check-tag tag-must">Required</span>
-      </div>
-      <div class="check-item" onclick="toggle(this)" data-group="2" data-required="true">
-        <input type="checkbox"><div class="check-box"></div>
-        <div class="check-body">
-          <div class="check-label">Message type — Transactional / Promotional / Both</div>
-          <div class="check-desc">Transactional = OTP, alerts, order confirmations. Promotional = marketing campaigns, offers.</div>
-        </div>
-        <span class="check-tag tag-must">Required</span>
-      </div>
-      <div class="check-item" onclick="toggle(this)" data-group="2" data-required="true">
-        <input type="checkbox"><div class="check-box"></div>
-        <div class="check-body">
-          <div class="check-label">Destination countries listed</div>
-          <div class="check-desc">All countries where you intend to send Viber messages (e.g. Indonesia, Philippines, Malaysia, Thailand).</div>
-        </div>
-        <span class="check-tag tag-must">Required</span>
-      </div>
-      <div class="check-item" onclick="toggle(this)" data-group="2" data-required="true">
-        <input type="checkbox"><div class="check-box"></div>
-        <div class="check-body">
-          <div class="check-label">Expected monthly volume (estimate)</div>
-          <div class="check-desc">Approximate number of messages per month — helps 8x8 set up the right routing for your account.</div>
-        </div>
-        <span class="check-tag tag-must">Required</span>
-      </div>
-    </div>
-
-    <!-- GROUP 4: Technical -->
-    <div class="checklist-group">
-      <div class="checklist-group-title">
-        <div class="group-icon">⚙️</div>
-        Technical Readiness
-        <span class="group-count" id="g3-count">0 / 2</span>
-      </div>
-
-      <div class="check-item" onclick="toggle(this)" data-group="3" data-required="true">
-        <input type="checkbox"><div class="check-box"></div>
-        <div class="check-body">
-          <div class="check-label">Technical / DRI contact identified</div>
-          <div class="check-desc">Name and email of the person responsible for API integration on your side.</div>
-        </div>
-        <span class="check-tag tag-must">Required</span>
-      </div>
-      <div class="check-item" onclick="toggle(this)" data-group="3" data-required="true">
-        <input type="checkbox"><div class="check-box"></div>
-        <div class="check-body">
-          <div class="check-label">Integration method decided — Portal or API</div>
-          <div class="check-desc">8x8 Connect Portal (no code, basic automation) or API integration (developer-driven, needs webhook URL).</div>
-        </div>
-        <span class="check-tag tag-must">Required</span>
-      </div>
-    </div>
-
-    <!-- GATE BANNER -->
-    <div class="gate-banner" id="gate-0">
-      <h3 id="gate-title-0">⏳ Complete all items above to unlock the next step</h3>
-      <p id="gate-sub-0">Check off all required prerequisites — then the rest of the onboarding guide will unlock for you.</p>
-      <div class="gate-items" id="gate-items-0">
-        <div class="gate-item" id="gi-0"><div class="gi-dot"></div> Business Info (0/8)</div>
-        <div class="gate-item" id="gi-1"><div class="gi-dot"></div> Logos (0/5)</div>
-        <div class="gate-item" id="gi-2"><div class="gi-dot"></div> Messaging Config (0/4)</div>
-        <div class="gate-item" id="gi-3"><div class="gi-dot"></div> Technical (0/2)</div>
-      </div>
-      <button class="btn-next" id="btn-next-0" disabled onclick="goToStep(1)">Continue to Required Documents →</button>
-    </div>
-  </div>
-
-  <!-- ════ STEP 1: REQUIRED DOCUMENTS ════ -->
-  <div class="step-page" id="page-1">
-    <div class="page-eyebrow">Step 2 of 5</div>
-    <div class="page-title">Required Documents</div>
-    <div class="page-sub">Prepare and sign these documents before submitting your Viber registration. Your 8x8 CSM will provide the BM Warranty Letter template.</div>
-
-    <table class="doc-table">
+  <div style="margin-top: 24px;">
+    <table class="compare-table">
       <thead>
         <tr>
-          <th>Document</th>
-          <th>Who prepares</th>
-          <th>Format</th>
-          <th>Required</th>
+          <th>Template Category</th>
+          <th>Use Case</th>
+          <th>Required Variable</th>
+          <th>Viber UX</th>
         </tr>
       </thead>
       <tbody>
         <tr>
-          <td>
-            <div class="doc-name">BM Warranty Letter — General</div>
-            <div class="doc-detail">Signed by authorized signatory on company letterhead. Confirms your company will comply with Viber's Business Messages Guidelines including sending only to opted-in users.</div>
-          </td>
-          <td style="color:#374151;font-size:13px">Customer — signed by authorized signatory</td>
-          <td style="color:#374151;font-size:13px">PDF scan, company letterhead</td>
-          <td><span class="check-tag tag-must">Must</span></td>
+          <td>OTP</td>
+          <td>One-time passwords, verification codes, PIN delivery</td>
+          <td><code>{{pin}}</code> — mandatory</td>
+          <td>Card with native Copy button for the PIN value</td>
         </tr>
         <tr>
-          <td>
-            <div class="doc-name">Business License / Registration Certificate</div>
-            <div class="doc-detail">Official document proving your company is legally registered — SIUP, NIB, TDP, or equivalent in your country.</div>
-          </td>
-          <td style="color:#374151;font-size:13px">Customer</td>
-          <td style="color:#374151;font-size:13px">PDF scan</td>
-          <td><span class="check-tag tag-must">Must</span></td>
-        </tr>
-        <tr>
-          <td>
-            <div class="doc-name">BM Warranty Letter — Credit / Loan version</div>
-            <div class="doc-detail">A different Warranty Letter applies specifically for credit, loan, and fintech lending companies. Request this template from your CSM.</div>
-          </td>
-          <td style="color:#374151;font-size:13px">Customer (CSM provides template)</td>
-          <td style="color:#374151;font-size:13px">PDF scan, company letterhead</td>
-          <td><span class="check-tag tag-cond">If applicable</span></td>
-        </tr>
-        <tr>
-          <td>
-            <div class="doc-name">BM Warranty Letter — Gaming / Gambling version</div>
-            <div class="doc-detail">Specific warranty letter for gaming, gambling, and online entertainment platforms. Request from your CSM.</div>
-          </td>
-          <td style="color:#374151;font-size:13px">Customer (CSM provides template)</td>
-          <td style="color:#374151;font-size:13px">PDF scan, company letterhead</td>
-          <td><span class="check-tag tag-cond">If applicable</span></td>
-        </tr>
-        <tr>
-          <td>
-            <div class="doc-name">Company Logo — all 5 PNG sizes</div>
-            <div class="doc-detail">50×50 · 65×65 · 100×100 · 130×130 · 360×280 px. PNG format only — no JPG or SVG accepted by Viber.</div>
-          </td>
-          <td style="color:#374151;font-size:13px">Customer Design / Marketing team</td>
-          <td style="color:var(--muted);font-size:13px">PNG files (all 5 sizes)</td>
-          <td><span class="check-tag tag-must">Must</span></td>
-        </tr>
-        <tr>
-          <td>
-            <div class="doc-name">Completed Viber Onboarding Form</div>
-            <div class="doc-detail">Fill in the 8x8 Viber Onboarding Form (shared by your CSM). Return it with all documents above in a single email.</div>
-          </td>
-          <td style="color:#374151;font-size:13px">Customer (CSM provides form)</td>
-          <td style="color:#374151;font-size:13px">Completed DOCX or PDF</td>
-          <td><span class="check-tag tag-must">Must</span></td>
+          <td>Transactional</td>
+          <td>Order updates, shipping, payment alerts, account notifications</td>
+          <td>Up to 5 custom variables</td>
+          <td>Standard message format</td>
         </tr>
       </tbody>
     </table>
+  </div>
+</section>
 
-    <div class="alert alert-info">💡 &nbsp;<strong>Tip:</strong> Submit all documents in one batch to your CSM. Incomplete submissions restart the review process and extend your timeline by 3–5 business days.</div>
+<!-- PATH SELECTOR -->
+<section id="path">
+  <div class="section-label">Choose Your Path</div>
+  <div class="section-title">New Account or Migrating?</div>
+  <div class="section-sub">The setup process differs depending on whether you're creating a brand new Viber Business account or transferring an existing one to 8x8.</div>
 
-    <div class="gate-banner unlocked" style="margin-top:32px">
-      <h3>✅ You're cleared to proceed</h3>
-      <p>You've confirmed your prerequisites. Review the documents above and prepare them before the kick-off call with your CSM.</p>
-      <div class="nav-row" style="justify-content:center">
-        <button class="btn-back" onclick="goToStep(0)">← Back</button>
-        <button class="btn-next" onclick="goToStep(2)">Continue to Timeline →</button>
+  <div class="path-selector">
+    <div class="path-card active" onclick="setPath('new')" id="card-new">
+      <div class="path-icon">🆕</div>
+      <h4>New Account</h4>
+      <p>Set up a brand new Viber Business Account with 8x8 — no existing Viber presence.</p>
+      <ul>
+        <li>New business account created from scratch</li>
+        <li>Business name registered with Viber</li>
+        <li>~48 hours approval for standard accounts</li>
+        <li>Submit brand assets and onboarding form</li>
+      </ul>
+    </div>
+    <div class="path-card" onclick="setPath('migrate')" id="card-migrate">
+      <div class="path-icon">🔄</div>
+      <h4>Migration</h4>
+      <p>Transfer your existing Viber Business Account from another provider to 8x8.</p>
+      <ul>
+        <li>Keep your existing Viber Service ID</li>
+        <li>Keep existing business name and branding</li>
+        <li>Requires Migration Letter submitted to Viber</li>
+        <li>8x8 coordinates the migration with Viber team</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- COMPARE TABLE -->
+  <table class="compare-table">
+    <thead>
+      <tr>
+        <th>Factor</th>
+        <th>New Account</th>
+        <th>Migration</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>Viber Service ID</td><td><span class="badge-new">New ID assigned</span></td><td><span class="badge-yes">Existing ID retained</span></td></tr>
+      <tr><td>Business name</td><td><span class="badge-new">New registration</span></td><td><span class="badge-yes">Carry over</span></td></tr>
+      <tr><td>Templates</td><td><span class="badge-new">Submit from scratch</span></td><td><span class="badge-req">Resubmit if on old system</span></td></tr>
+      <tr><td>Migration letter</td><td>Not required</td><td><span class="badge-req">Required</span></td></tr>
+      <tr><td>Account approval time</td><td>~48 hours (standard)</td><td>Coordinated with Viber team</td></tr>
+      <tr><td>Warranty letter</td><td><span class="badge-req">Required</span></td><td>Depends on case</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- PREREQUISITES -->
+<section id="prereq">
+  <div class="section-label">Before You Start</div>
+  <div class="section-title">Prerequisites</div>
+
+  <!-- NEW ONBOARDING PREREQ -->
+  <div class="tab-content active" id="prereq-new">
+    <div class="section-sub">Requirements for setting up a <strong>new</strong> Viber Business Account.</div>
+    <div class="prereq-grid">
+
+      <div class="prereq-card">
+        <div class="icon">🏢</div>
+        <h4>Business Information</h4>
+        <ul class="check-list">
+          <li onclick="toggleCheck(this)"><div class="cb-box"><svg viewBox="0 0 12 12" fill="none"><polyline points="1.5,6 4.5,9 10.5,3" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="cb-label"><strong>Business name</strong> — exact name as it will appear to Viber users</span></li>
+          <li onclick="toggleCheck(this)"><div class="cb-box"><svg viewBox="0 0 12 12" fill="none"><polyline points="1.5,6 4.5,9 10.5,3" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="cb-label"><strong>Business category</strong> — your industry (e.g. finance, retail, healthcare)</span></li>
+          <li onclick="toggleCheck(this)"><div class="cb-box"><svg viewBox="0 0 12 12" fill="none"><polyline points="1.5,6 4.5,9 10.5,3" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="cb-label"><strong>Business registered country</strong></span></li>
+          <li onclick="toggleCheck(this)"><div class="cb-box"><svg viewBox="0 0 12 12" fill="none"><polyline points="1.5,6 4.5,9 10.5,3" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="cb-label"><strong>Desired launch date</strong></span></li>
+          <li onclick="toggleCheck(this)"><div class="cb-box"><svg viewBox="0 0 12 12" fill="none"><polyline points="1.5,6 4.5,9 10.5,3" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="cb-label">Confirm <strong>one-way</strong> (send only) or <strong>two-way</strong> (send & receive) messaging</span></li>
+        </ul>
+      </div>
+
+      <div class="prereq-card">
+        <div class="icon">🖼️</div>
+        <h4>Brand Assets — Logo Images</h4>
+        <ul class="check-list">
+          <li onclick="toggleCheck(this)"><div class="cb-box"><svg viewBox="0 0 12 12" fill="none"><polyline points="1.5,6 4.5,9 10.5,3" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="cb-label">Logo <strong>50 × 50 px</strong></span></li>
+          <li onclick="toggleCheck(this)"><div class="cb-box"><svg viewBox="0 0 12 12" fill="none"><polyline points="1.5,6 4.5,9 10.5,3" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="cb-label">Logo <strong>65 × 65 px</strong></span></li>
+          <li onclick="toggleCheck(this)"><div class="cb-box"><svg viewBox="0 0 12 12" fill="none"><polyline points="1.5,6 4.5,9 10.5,3" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="cb-label">Logo <strong>100 × 100 px</strong></span></li>
+          <li onclick="toggleCheck(this)"><div class="cb-box"><svg viewBox="0 0 12 12" fill="none"><polyline points="1.5,6 4.5,9 10.5,3" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="cb-label">Logo <strong>130 × 130 px</strong></span></li>
+          <li onclick="toggleCheck(this)"><div class="cb-box"><svg viewBox="0 0 12 12" fill="none"><polyline points="1.5,6 4.5,9 10.5,3" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="cb-label">Logo <strong>360 × 280 px</strong> (banner/cover image)</span></li>
+        </ul>
+      </div>
+
+      <div class="prereq-card">
+        <div class="icon">📋</div>
+        <h4>Documents</h4>
+        <ul class="check-list">
+          <li onclick="toggleCheck(this)"><div class="cb-box"><svg viewBox="0 0 12 12" fill="none"><polyline points="1.5,6 4.5,9 10.5,3" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="cb-label"><strong>Viber Onboarding Document</strong> fully completed (template provided by 8x8)</span></li>
+          <li onclick="toggleCheck(this)"><div class="cb-box"><svg viewBox="0 0 12 12" fill="none"><polyline points="1.5,6 4.5,9 10.5,3" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="cb-label"><strong>Warranty Letter</strong> — provided and signed (template from 8x8)</span></li>
+        </ul>
+      </div>
+
+      <div class="prereq-card">
+        <div class="icon">💬</div>
+        <h4>Message Templates</h4>
+        <ul class="check-list">
+          <li onclick="toggleCheck(this)"><div class="cb-box"><svg viewBox="0 0 12 12" fill="none"><polyline points="1.5,6 4.5,9 10.5,3" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="cb-label"><strong>Template drafts ready</strong> for each use case (OTP and/or Transactional)</span></li>
+          <li onclick="toggleCheck(this)"><div class="cb-box"><svg viewBox="0 0 12 12" fill="none"><polyline points="1.5,6 4.5,9 10.5,3" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="cb-label">OTP templates include the <strong><code>{{pin}}</code> variable</strong></span></li>
+          <li onclick="toggleCheck(this)"><div class="cb-box"><svg viewBox="0 0 12 12" fill="none"><polyline points="1.5,6 4.5,9 10.5,3" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="cb-label">Each template <strong>starts and ends with static text</strong> (not a variable)</span></li>
+          <li onclick="toggleCheck(this)"><div class="cb-box"><svg viewBox="0 0 12 12" fill="none"><polyline points="1.5,6 4.5,9 10.5,3" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="cb-label"><strong>Example values</strong> prepared for each variable (used in Viber's review)</span></li>
+          <li onclick="toggleCheck(this)"><div class="cb-box"><svg viewBox="0 0 12 12" fill="none"><polyline points="1.5,6 4.5,9 10.5,3" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="cb-label">Language confirmed for each template</span></li>
+        </ul>
+      </div>
+
+      <div class="warn-box">⚠️ <span><strong>Special industries:</strong> Gambling/betting businesses must provide a valid <strong>gambling license</strong>. Loan/microcredit businesses in the Philippines must provide a <strong>Mayor's Permit</strong> and <strong>Business TIN</strong>. Additional review time may apply. Contact 8x8 if your industry requires special documentation.</span></div>
+
+    </div>
+  </div>
+
+  <!-- MIGRATION PREREQ -->
+  <div class="tab-content" id="prereq-migrate">
+    <div class="section-sub">Requirements for <strong>migrating</strong> an existing Viber Business Account to 8x8.</div>
+    <div class="prereq-grid">
+
+      <div class="prereq-card">
+        <div class="icon">🔄</div>
+        <h4>Current Account Details</h4>
+        <ul class="check-list">
+          <li onclick="toggleCheck(this)"><div class="cb-box"><svg viewBox="0 0 12 12" fill="none"><polyline points="1.5,6 4.5,9 10.5,3" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="cb-label"><strong>Viber Service ID</strong> (Business ID) from your current provider</span></li>
+          <li onclick="toggleCheck(this)"><div class="cb-box"><svg viewBox="0 0 12 12" fill="none"><polyline points="1.5,6 4.5,9 10.5,3" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="cb-label"><strong>Business name</strong> as currently registered with Viber</span></li>
+          <li onclick="toggleCheck(this)"><div class="cb-box"><svg viewBox="0 0 12 12" fill="none"><polyline points="1.5,6 4.5,9 10.5,3" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="cb-label"><strong>Phone number</strong> linked to the account (if applicable)</span></li>
+          <li onclick="toggleCheck(this)"><div class="cb-box"><svg viewBox="0 0 12 12" fill="none"><polyline points="1.5,6 4.5,9 10.5,3" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="cb-label">Confirm <strong>one-way</strong> or <strong>two-way</strong> messaging requirement</span></li>
+        </ul>
+      </div>
+
+      <div class="prereq-card">
+        <div class="icon">🖼️</div>
+        <h4>Brand Assets — Logo Images</h4>
+        <ul class="check-list">
+          <li onclick="toggleCheck(this)"><div class="cb-box"><svg viewBox="0 0 12 12" fill="none"><polyline points="1.5,6 4.5,9 10.5,3" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="cb-label">Logo <strong>50 × 50 px</strong></span></li>
+          <li onclick="toggleCheck(this)"><div class="cb-box"><svg viewBox="0 0 12 12" fill="none"><polyline points="1.5,6 4.5,9 10.5,3" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="cb-label">Logo <strong>65 × 65 px</strong></span></li>
+          <li onclick="toggleCheck(this)"><div class="cb-box"><svg viewBox="0 0 12 12" fill="none"><polyline points="1.5,6 4.5,9 10.5,3" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="cb-label">Logo <strong>100 × 100 px</strong></span></li>
+          <li onclick="toggleCheck(this)"><div class="cb-box"><svg viewBox="0 0 12 12" fill="none"><polyline points="1.5,6 4.5,9 10.5,3" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="cb-label">Logo <strong>130 × 130 px</strong></span></li>
+          <li onclick="toggleCheck(this)"><div class="cb-box"><svg viewBox="0 0 12 12" fill="none"><polyline points="1.5,6 4.5,9 10.5,3" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="cb-label">Logo <strong>360 × 280 px</strong></span></li>
+        </ul>
+      </div>
+
+      <div class="prereq-card">
+        <div class="icon">📋</div>
+        <h4>Documents</h4>
+        <ul class="check-list">
+          <li onclick="toggleCheck(this)"><div class="cb-box"><svg viewBox="0 0 12 12" fill="none"><polyline points="1.5,6 4.5,9 10.5,3" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="cb-label"><strong>Viber Onboarding Document</strong> fully completed (template from 8x8)</span></li>
+          <li onclick="toggleCheck(this)"><div class="cb-box"><svg viewBox="0 0 12 12" fill="none"><polyline points="1.5,6 4.5,9 10.5,3" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="cb-label"><strong>Viber Migration Letter</strong> completed and signed (template provided by 8x8)</span></li>
+        </ul>
+      </div>
+
+      <div class="prereq-card">
+        <div class="icon">💬</div>
+        <h4>Message Templates</h4>
+        <ul class="check-list">
+          <li onclick="toggleCheck(this)"><div class="cb-box"><svg viewBox="0 0 12 12" fill="none"><polyline points="1.5,6 4.5,9 10.5,3" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="cb-label"><strong>New template drafts</strong> prepared per Viber's July 2026 template format</span></li>
+          <li onclick="toggleCheck(this)"><div class="cb-box"><svg viewBox="0 0 12 12" fill="none"><polyline points="1.5,6 4.5,9 10.5,3" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="cb-label">OTP templates include the <strong><code>{{pin}}</code> variable</strong></span></li>
+          <li onclick="toggleCheck(this)"><div class="cb-box"><svg viewBox="0 0 12 12" fill="none"><polyline points="1.5,6 4.5,9 10.5,3" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="cb-label"><strong>Example values</strong> for each variable prepared</span></li>
+        </ul>
+      </div>
+
+      <div class="info-box">ℹ️ <span>Even during migration, templates must be submitted and re-approved under the new 8x8-managed account. The Viber template system changed as of July 15, 2026 — all templates (even existing ones) must conform to the new template format.</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- STEPS -->
+<section id="steps">
+  <div class="section-label">Step by Step</div>
+  <div class="section-title">Onboarding Process</div>
+
+  <!-- NEW ONBOARDING STEPS -->
+  <div class="tab-content active" id="steps-new">
+    <div class="section-sub">Steps for setting up a <strong>new</strong> Viber Business Account via 8x8.</div>
+    <div class="step-list">
+
+      <div class="step-item">
+        <div class="step-num">1</div>
+        <div class="step-body">
+          <div class="party">Client</div>
+          <h4>Complete Viber Onboarding Document & Prepare Assets</h4>
+          <p>Fill out the Viber Onboarding Document provided by 8x8 and prepare all required assets:</p>
+          <ul>
+            <li>Business name, category, registered country, launch date</li>
+            <li>Logo images in all 5 required dimensions</li>
+            <li>Confirm one-way or two-way messaging</li>
+            <li>Signed Warranty Letter</li>
+          </ul>
+          <span class="step-tag tag-client">Client Action</span>
+        </div>
+      </div>
+
+      <div class="step-item">
+        <div class="step-num">2</div>
+        <div class="step-body">
+          <div class="party">Client</div>
+          <h4>Prepare & Submit Template Drafts to 8x8</h4>
+          <p>Design your message templates for all required use cases and submit them to 8x8 for review. Ensure all templates follow Viber's rules:</p>
+          <ul>
+            <li>OTP templates must contain <strong><code>{{pin}}</code></strong> variable</li>
+            <li>Body starts and ends with static text</li>
+            <li>No two variables placed next to each other</li>
+            <li>Include example values for each variable</li>
+          </ul>
+          <div class="step-note">⚠️ Templates with promotional content will be declined by Viber. Review carefully before submission. Any change after approval = delete + full resubmission.</div>
+          <span class="step-tag tag-client">Client Action</span>
+        </div>
+      </div>
+
+      <div class="step-item">
+        <div class="step-num">3</div>
+        <div class="step-body">
+          <div class="party">Agency (8x8)</div>
+          <h4>Create Viber Business Account</h4>
+          <p>8x8 submits the business registration to the Viber Business Portal using the onboarding document and assets provided. The business name is registered and logo uploaded.</p>
+          <div class="step-note-info">ℹ️ Your business name is checked against the Viber app before submission. If it already exists, 8x8 will coordinate accordingly.</div>
+          <span class="step-tag tag-8x8">8x8 Action</span>
+        </div>
+      </div>
+
+      <div class="step-item">
+        <div class="step-num">4</div>
+        <div class="step-body">
+          <div class="party">Viber Team</div>
+          <h4>Account Review & Approval</h4>
+          <p>Viber reviews the business account submission. Standard approval takes approximately <strong>48 hours</strong>. Special industries (gambling, lending) may take longer as additional documents are reviewed by Viber's legal team.</p>
+          <div class="step-note">⚠️ Do not proceed to template submission until the business account is Approved/Active in the Viber portal.</div>
+          <span class="step-tag tag-viber">Viber Action</span>
+        </div>
+      </div>
+
+      <div class="step-item">
+        <div class="step-num">5</div>
+        <div class="step-body">
+          <div class="party">Agency (8x8)</div>
+          <h4>Submit Templates to Viber for Approval</h4>
+          <p>Once the account is approved, 8x8 submits your message templates to Viber for human review. Each template enters a <strong>Pending</strong> state. You will be notified when templates are Approved or Declined.</p>
+          <ul>
+            <li>Approval: template ready for use immediately</li>
+            <li>Declined: reason provided — template must be corrected and resubmitted</li>
+          </ul>
+          <div class="step-note-info">ℹ️ Template review takes up to 24 hours per submission. Submit all templates at once to avoid delays.</div>
+          <span class="step-tag tag-8x8">8x8 Action</span>
+        </div>
+      </div>
+
+      <div class="step-item">
+        <div class="step-num">6</div>
+        <div class="step-body">
+          <div class="party">Agency (8x8)</div>
+          <h4>Channel Configuration & API Setup</h4>
+          <p>8x8 configures your Viber channel and provides you with the API credentials and approved template IDs (templateKeys) needed to integrate.</p>
+          <span class="step-tag tag-8x8">8x8 Action</span>
+        </div>
+      </div>
+
+      <div class="step-item">
+        <div class="step-num">7</div>
+        <div class="step-body">
+          <div class="party">Client</div>
+          <h4>Integration & Testing</h4>
+          <p>Integrate the 8x8 Viber API into your system using the provided credentials and templateKeys. Test message delivery end-to-end with 8x8 monitoring.</p>
+          <ul>
+            <li>Test OTP delivery with Copy button functionality</li>
+            <li>Validate template parameter mapping</li>
+            <li>Confirm message display (name, logo) on recipient's device</li>
+          </ul>
+          <span class="step-tag tag-client">Client Action</span>
+        </div>
+      </div>
+
+      <div class="step-item">
+        <div class="step-num">8</div>
+        <div class="step-body">
+          <div class="party">Agency (8x8)</div>
+          <h4>Go Live 🎉</h4>
+          <p>8x8 sets the account to Live and billing begins. Your Viber Business Account is now active and sending in production.</p>
+          <div class="step-note-green">✅ You're live! Monitor message delivery and template performance in the 8x8 Connect portal.</div>
+          <span class="step-tag tag-8x8">8x8 Action</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- MIGRATION STEPS -->
+  <div class="tab-content" id="steps-migrate">
+    <div class="section-sub">Steps for <strong>migrating</strong> your existing Viber Business Account to 8x8.</div>
+    <div class="step-list">
+
+      <div class="step-item">
+        <div class="step-num">1</div>
+        <div class="step-body">
+          <div class="party">Client</div>
+          <h4>Complete Onboarding & Migration Documents</h4>
+          <p>Fill out both documents provided by 8x8 and prepare all assets:</p>
+          <ul>
+            <li><strong>Viber Onboarding Document</strong> — business details, logos</li>
+            <li><strong>Viber Migration Letter</strong> — signed by authorized company representative</li>
+            <li>Current Viber Service ID and business name</li>
+            <li>Logo images in all 5 required dimensions</li>
+          </ul>
+          <span class="step-tag tag-client">Client Action</span>
+        </div>
+      </div>
+
+      <div class="step-item">
+        <div class="step-num">2</div>
+        <div class="step-body">
+          <div class="party">Client</div>
+          <h4>Prepare New Template Drafts</h4>
+          <p>Even for migration, templates must be resubmitted in Viber's new format (effective July 2026). Prepare all OTP and Transactional template drafts following the new rules and submit to 8x8.</p>
+          <div class="step-note-info">ℹ️ Old free-text messages are no longer valid. All templates must follow the new structured format with proper variables and category (OTP or Transactional).</div>
+          <span class="step-tag tag-client">Client Action</span>
+        </div>
+      </div>
+
+      <div class="step-item">
+        <div class="step-num">3</div>
+        <div class="step-body">
+          <div class="party">Agency (8x8)</div>
+          <h4>Contact Viber Team to Initiate Migration</h4>
+          <p>8x8 emails the Viber partner team with your Migration Letter and account details to officially request the account transfer. The email includes your current Service ID, business name, and the target details for migration to 8x8.</p>
+          <div class="step-note">⚠️ Do not disconnect from your current provider until 8x8 confirms the migration is complete. Running both in parallel during the window is safe.</div>
+          <span class="step-tag tag-8x8">8x8 Action</span>
+        </div>
+      </div>
+
+      <div class="step-item">
+        <div class="step-num">4</div>
+        <div class="step-body">
+          <div class="party">Viber Team</div>
+          <h4>Viber Processes Migration</h4>
+          <p>Viber's team reviews the Migration Letter and processes the account transfer. Standard processing time is approximately <strong>48 hours</strong>.</p>
+          <span class="step-tag tag-viber">Viber Action</span>
+        </div>
+      </div>
+
+      <div class="step-item">
+        <div class="step-num">5</div>
+        <div class="step-body">
+          <div class="party">Agency (8x8)</div>
+          <h4>Configure Channel on 8x8 Platform</h4>
+          <p>Once migration is confirmed by Viber, 8x8 configures your account on the 8x8 platform with the migrated Service ID and settings.</p>
+          <span class="step-tag tag-8x8">8x8 Action</span>
+        </div>
+      </div>
+
+      <div class="step-item">
+        <div class="step-num">6</div>
+        <div class="step-body">
+          <div class="party">Agency (8x8)</div>
+          <h4>Submit Templates for Approval</h4>
+          <p>8x8 submits your new template drafts to Viber for review. Each template takes up to 24 hours for Viber's human moderation team to approve or decline.</p>
+          <span class="step-tag tag-8x8">8x8 Action</span>
+        </div>
+      </div>
+
+      <div class="step-item">
+        <div class="step-num">7</div>
+        <div class="step-body">
+          <div class="party">Client</div>
+          <h4>Update API Integration & Test</h4>
+          <p>Update your integration to use 8x8's API endpoint and the new template IDs (templateKeys). Run end-to-end tests with 8x8 monitoring before switching production traffic.</p>
+          <ul>
+            <li>Update API credentials to 8x8 endpoint</li>
+            <li>Replace old message format with template-based calls</li>
+            <li>Validate OTP and Transactional template delivery</li>
+          </ul>
+          <span class="step-tag tag-client">Client Action</span>
+        </div>
+      </div>
+
+      <div class="step-item">
+        <div class="step-num">8</div>
+        <div class="step-body">
+          <div class="party">Agency (8x8)</div>
+          <h4>Go Live 🎉</h4>
+          <p>8x8 sets the migrated account to Live. Switch production traffic to 8x8 and decommission the old provider connection.</p>
+          <div class="step-note-green">✅ Migration complete! Monitor delivery via 8x8 Connect and confirm all templates are functioning as expected.</div>
+          <span class="step-tag tag-8x8">8x8 Action</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- CHECKLIST -->
+<section id="checklist">
+  <div class="section-label">Quick Reference</div>
+  <div class="section-title">Onboarding Checklist</div>
+  <div class="section-sub">Click each item to mark complete. Track your progress before going live.</div>
+
+  <div class="progress-label">Overall progress <span id="progress-text">0 / 0 completed</span></div>
+  <div class="progress-bar-wrap"><div class="progress-bar" id="progress-bar"></div></div>
+
+  <!-- NEW CHECKLIST -->
+  <div class="tab-content active" id="checklist-new">
+    <div class="checklist-grid">
+      <div class="checklist-section">
+        <h4>Documents & Assets</h4>
+        <ul class="check-list">
+          <li onclick="toggleCheck(this)"><div class="cb-box"><svg viewBox="0 0 12 12" fill="none"><polyline points="1.5,6 4.5,9 10.5,3" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="cb-label">Viber Onboarding Document completed</span></li>
+          <li onclick="toggleCheck(this)"><div class="cb-box"><svg viewBox="0 0 12 12" fill="none"><polyline points="1.5,6 4.5,9 10.5,3" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="cb-label">Warranty Letter signed</span></li>
+          <li onclick="toggleCheck(this)"><div class="cb-box"><svg viewBox="0 0 12 12" fill="none"><polyline points="1.5,6 4.5,9 10.5,3" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="cb-label">Logo 50×50 px ready</span></li>
+          <li onclick="toggleCheck(this)"><div class="cb-box"><svg viewBox="0 0 12 12" fill="none"><polyline points="1.5,6 4.5,9 10.5,3" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="cb-label">Logo 65×65 px ready</span></li>
+          <li onclick="toggleCheck(this)"><div class="cb-box"><svg viewBox="0 0 12 12" fill="none"><polyline points="1.5,6 4.5,9 10.5,3" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="cb-label">Logo 100×100 px ready</span></li>
+          <li onclick="toggleCheck(this)"><div class="cb-box"><svg viewBox="0 0 12 12" fill="none"><polyline points="1.5,6 4.5,9 10.5,3" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="cb-label">Logo 130×130 px ready</span></li>
+          <li onclick="toggleCheck(this)"><div class="cb-box"><svg viewBox="0 0 12 12" fill="none"><polyline points="1.5,6 4.5,9 10.5,3" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="cb-label">Logo 360×280 px (banner) ready</span></li>
+        </ul>
+      </div>
+      <div class="checklist-section">
+        <h4>Account Setup</h4>
+        <ul class="check-list">
+          <li onclick="toggleCheck(this)"><div class="cb-box"><svg viewBox="0 0 12 12" fill="none"><polyline points="1.5,6 4.5,9 10.5,3" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="cb-label">All assets submitted to 8x8</span></li>
+          <li onclick="toggleCheck(this)"><div class="cb-box"><svg viewBox="0 0 12 12" fill="none"><polyline points="1.5,6 4.5,9 10.5,3" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="cb-label">8x8 created Viber Business Account</span></li>
+          <li onclick="toggleCheck(this)"><div class="cb-box"><svg viewBox="0 0 12 12" fill="none"><polyline points="1.5,6 4.5,9 10.5,3" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="cb-label">Viber account status: Approved / Active</span></li>
+        </ul>
+      </div>
+      <div class="checklist-section">
+        <h4>Templates</h4>
+        <ul class="check-list">
+          <li onclick="toggleCheck(this)"><div class="cb-box"><svg viewBox="0 0 12 12" fill="none"><polyline points="1.5,6 4.5,9 10.5,3" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="cb-label">Template drafts reviewed and submitted to 8x8</span></li>
+          <li onclick="toggleCheck(this)"><div class="cb-box"><svg viewBox="0 0 12 12" fill="none"><polyline points="1.5,6 4.5,9 10.5,3" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="cb-label">Templates submitted to Viber by 8x8</span></li>
+          <li onclick="toggleCheck(this)"><div class="cb-box"><svg viewBox="0 0 12 12" fill="none"><polyline points="1.5,6 4.5,9 10.5,3" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="cb-label">All templates Approved — templateKeys received</span></li>
+        </ul>
+      </div>
+      <div class="checklist-section">
+        <h4>Integration & Go-Live</h4>
+        <ul class="check-list">
+          <li onclick="toggleCheck(this)"><div class="cb-box"><svg viewBox="0 0 12 12" fill="none"><polyline points="1.5,6 4.5,9 10.5,3" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="cb-label">API credentials and templateKeys integrated</span></li>
+          <li onclick="toggleCheck(this)"><div class="cb-box"><svg viewBox="0 0 12 12" fill="none"><polyline points="1.5,6 4.5,9 10.5,3" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="cb-label">End-to-end test sends completed & validated</span></li>
+          <li onclick="toggleCheck(this)"><div class="cb-box"><svg viewBox="0 0 12 12" fill="none"><polyline points="1.5,6 4.5,9 10.5,3" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="cb-label">Account set to Live by 8x8 🎉</span></li>
+        </ul>
       </div>
     </div>
   </div>
 
-  <!-- ════ STEP 2: TIMELINE ════ -->
-  <div class="step-page" id="page-2">
-    <div class="page-eyebrow">Step 3 of 5</div>
-    <div class="page-title">Onboarding Timeline</div>
-    <div class="page-sub">From deal close to go-live — here's what to expect at each stage. Your 8x8 CSM will guide you through every step.</div>
-
-    <div class="alert alert-warn">⏱️ &nbsp;<strong>Key factor:</strong> Submit all documents in one complete batch. Incomplete submissions add 3–5 business days to your timeline.</div>
-
-    <div class="timeline-wrap">
-      <div class="tl-item">
-        <div class="tl-left"><div class="tl-dot">D0</div></div>
-        <div class="tl-body">
-          <h4>Deal closed — CSM notified</h4>
-          <p>HubSpot automation fires when deal reaches 90%. Your 8x8 CSM is assigned and notified immediately.</p>
-          <div class="tl-meta">
-            <span class="tl-badge badge-time">Day 0</span>
-            <span class="tl-badge badge-owner">🤖 Automated</span>
-          </div>
-        </div>
+  <!-- MIGRATION CHECKLIST -->
+  <div class="tab-content" id="checklist-migrate">
+    <div class="checklist-grid">
+      <div class="checklist-section">
+        <h4>Documents & Assets</h4>
+        <ul class="check-list">
+          <li onclick="toggleCheck(this)"><div class="cb-box"><svg viewBox="0 0 12 12" fill="none"><polyline points="1.5,6 4.5,9 10.5,3" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="cb-label">Viber Onboarding Document completed</span></li>
+          <li onclick="toggleCheck(this)"><div class="cb-box"><svg viewBox="0 0 12 12" fill="none"><polyline points="1.5,6 4.5,9 10.5,3" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="cb-label">Viber Migration Letter signed</span></li>
+          <li onclick="toggleCheck(this)"><div class="cb-box"><svg viewBox="0 0 12 12" fill="none"><polyline points="1.5,6 4.5,9 10.5,3" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="cb-label">Current Viber Service ID confirmed</span></li>
+          <li onclick="toggleCheck(this)"><div class="cb-box"><svg viewBox="0 0 12 12" fill="none"><polyline points="1.5,6 4.5,9 10.5,3" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="cb-label">All logo images (5 sizes) prepared</span></li>
+        </ul>
       </div>
-      <div class="tl-item">
-        <div class="tl-left"><div class="tl-dot">D1</div></div>
-        <div class="tl-body">
-          <h4>Intro email + kick-off call</h4>
-          <p>Your CSM sends an intro email with the Viber Onboarding Form and BM Warranty Letter template. Kick-off call scheduled to confirm use case, account type, and document requirements.</p>
-          <div class="tl-meta">
-            <span class="tl-badge badge-time">Day 1–2</span>
-            <span class="tl-badge badge-owner">👤 CSM</span>
-          </div>
-        </div>
+      <div class="checklist-section">
+        <h4>Migration Process</h4>
+        <ul class="check-list">
+          <li onclick="toggleCheck(this)"><div class="cb-box"><svg viewBox="0 0 12 12" fill="none"><polyline points="1.5,6 4.5,9 10.5,3" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="cb-label">All documents submitted to 8x8</span></li>
+          <li onclick="toggleCheck(this)"><div class="cb-box"><svg viewBox="0 0 12 12" fill="none"><polyline points="1.5,6 4.5,9 10.5,3" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="cb-label">8x8 contacted Viber team to initiate migration</span></li>
+          <li onclick="toggleCheck(this)"><div class="cb-box"><svg viewBox="0 0 12 12" fill="none"><polyline points="1.5,6 4.5,9 10.5,3" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="cb-label">Viber confirmed migration complete</span></li>
+          <li onclick="toggleCheck(this)"><div class="cb-box"><svg viewBox="0 0 12 12" fill="none"><polyline points="1.5,6 4.5,9 10.5,3" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="cb-label">8x8 configured channel on platform</span></li>
+        </ul>
       </div>
-      <div class="tl-item">
-        <div class="tl-left"><div class="tl-dot">D3</div></div>
-        <div class="tl-body">
-          <h4>Submit Onboarding Form + all documents</h4>
-          <p>Return the completed Viber Onboarding Form, signed BM Warranty Letter, business license, and all 5 logo PNG files to your CSM in a single email.</p>
-          <div class="tl-meta">
-            <span class="tl-badge badge-time">Day 2–4</span>
-            <span class="tl-badge badge-owner">🏢 Customer action</span>
-            <span class="tl-badge badge-warn">⚠ All docs in one batch</span>
-          </div>
-        </div>
+      <div class="checklist-section">
+        <h4>Templates</h4>
+        <ul class="check-list">
+          <li onclick="toggleCheck(this)"><div class="cb-box"><svg viewBox="0 0 12 12" fill="none"><polyline points="1.5,6 4.5,9 10.5,3" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="cb-label">New template drafts (new format) submitted to 8x8</span></li>
+          <li onclick="toggleCheck(this)"><div class="cb-box"><svg viewBox="0 0 12 12" fill="none"><polyline points="1.5,6 4.5,9 10.5,3" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="cb-label">Templates submitted to Viber by 8x8</span></li>
+          <li onclick="toggleCheck(this)"><div class="cb-box"><svg viewBox="0 0 12 12" fill="none"><polyline points="1.5,6 4.5,9 10.5,3" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="cb-label">All templates Approved — templateKeys received</span></li>
+        </ul>
       </div>
-      <div class="tl-item">
-        <div class="tl-left"><div class="tl-dot">D4</div></div>
-        <div class="tl-body">
-          <h4>8x8 submits registration to Viber</h4>
-          <p>Once all documents are received and verified, 8x8 submits your sender profile registration to Viber. No action required from you at this stage.</p>
-          <div class="tl-meta">
-            <span class="tl-badge badge-time">Day 3–5</span>
-            <span class="tl-badge badge-owner">👤 8x8 CSM + BizOps</span>
-          </div>
-        </div>
-      </div>
-      <div class="tl-item">
-        <div class="tl-left"><div class="tl-dot">D10</div></div>
-        <div class="tl-body">
-          <h4>Viber review & sender approval</h4>
-          <p>Viber reviews your business profile, documents, and intended use. Approval typically takes 5–10 business days. Your CSM monitors progress and follows up if needed.</p>
-          <div class="tl-meta">
-            <span class="tl-badge badge-time">5–10 business days</span>
-            <span class="tl-badge badge-owner">💜 Viber review</span>
-          </div>
-        </div>
-      </div>
-      <div class="tl-item">
-        <div class="tl-left"><div class="tl-dot">D14</div></div>
-        <div class="tl-body">
-          <h4>Portal walkthrough + API / webhook test</h4>
-          <p>Sender approved! Your CSM demos the 8x8 Connect portal, shares API credentials, and assists with webhook configuration. Your dev team runs end-to-end testing.</p>
-          <div class="tl-meta">
-            <span class="tl-badge badge-time">Day 10–16</span>
-            <span class="tl-badge badge-owner">👤 CSM + SE + Your Dev</span>
-          </div>
-        </div>
-      </div>
-      <div class="tl-item">
-        <div class="tl-left"><div class="tl-dot done">✓</div></div>
-        <div class="tl-body" style="border-color:#86EFAC;background:#F0FDF4">
-          <h4>🎉 Go-Live — First message sent!</h4>
-          <p>CSM monitors your first production send, confirms delivery, and marks your account as Live in HubSpot. Your Viber Business channel is officially active.</p>
-          <div class="tl-meta">
-            <span class="tl-badge" style="background:var(--success-bg);color:var(--success)">Day 14–21</span>
-            <span class="tl-badge badge-owner">👤 CSM</span>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="gate-banner unlocked">
-      <h3>✅ Timeline reviewed</h3>
-      <p>You know what to expect. Now let's walk through the detailed setup steps.</p>
-      <div class="nav-row" style="justify-content:center">
-        <button class="btn-back" onclick="goToStep(1)">← Back</button>
-        <button class="btn-next" onclick="goToStep(3)">Continue to Setup Steps →</button>
+      <div class="checklist-section">
+        <h4>Integration & Go-Live</h4>
+        <ul class="check-list">
+          <li onclick="toggleCheck(this)"><div class="cb-box"><svg viewBox="0 0 12 12" fill="none"><polyline points="1.5,6 4.5,9 10.5,3" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="cb-label">8x8 API credentials integrated into system</span></li>
+          <li onclick="toggleCheck(this)"><div class="cb-box"><svg viewBox="0 0 12 12" fill="none"><polyline points="1.5,6 4.5,9 10.5,3" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="cb-label">Test sends completed on 8x8 platform</span></li>
+          <li onclick="toggleCheck(this)"><div class="cb-box"><svg viewBox="0 0 12 12" fill="none"><polyline points="1.5,6 4.5,9 10.5,3" stroke="white" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg></div><span class="cb-label">Production traffic switched to 8x8 🎉</span></li>
+        </ul>
       </div>
     </div>
   </div>
+</section>
 
-  <!-- ════ STEP 3: SETUP STEPS ════ -->
-  <div class="step-page" id="page-3">
-    <div class="page-eyebrow">Step 4 of 5</div>
-    <div class="page-title">Setup Steps</div>
-    <div class="page-sub">A detailed walkthrough of each action required from you and from 8x8. Follow these in order.</div>
-
-    <div class="content-grid">
-      <div class="content-card">
-        <div class="content-card-icon">📞</div>
-        <h4>Step 1 — Kick-off call with CSM</h4>
-        <p>CSM confirms: use case (1-way/2-way), message type (transactional/promotional), account type, and document requirements. Onboarding timeline agreed.</p>
-      </div>
-      <div class="content-card">
-        <div class="content-card-icon">📝</div>
-        <h4>Step 2 — Complete Viber Onboarding Form</h4>
-        <p>Fill in the 8x8 Viber Onboarding Form (shared by CSM after kick-off). Provide all required business info. Prepare logos in all required PNG sizes before submitting.</p>
-      </div>
-      <div class="content-card">
-        <div class="content-card-icon">✍️</div>
-        <h4>Step 3 — Sign & submit BM Warranty Letter</h4>
-        <p>Print the BM Warranty Letter on company letterhead. Have your authorized signatory sign it. Send back to CSM together with your business license in one email.</p>
-      </div>
-      <div class="content-card">
-        <div class="content-card-icon">📤</div>
-        <h4>Step 4 — 8x8 submits to Viber</h4>
-        <p>Once all documents are received and verified, 8x8 submits your sender profile registration to Viber. No action required from your side at this stage.</p>
-      </div>
-      <div class="content-card">
-        <div class="content-card-icon">⏳</div>
-        <h4>Step 5 — Viber review (5–10 business days)</h4>
-        <p>Viber reviews your profile and approves your sender. Your CSM monitors and follows up with Viber if there are delays. You'll be notified once approved.</p>
-      </div>
-      <div class="content-card">
-        <div class="content-card-icon">🔗</div>
-        <h4>Step 6 — Portal walkthrough + API / webhook test</h4>
-        <p>CSM demos 8x8 Connect portal, shares API credentials, and assists your dev team with webhook configuration and end-to-end integration testing.</p>
-      </div>
-    </div>
-
-    <div class="alert alert-ok">✅ &nbsp;<strong>Viber Template Note (as of July 2026):</strong> Viber requires pre-approved templates for all transactional and OTP messages. Messages sent without a registered template are billed at the higher promotional rate. Your CSM will assist with template registration during Step 6.</div>
-
-    <div class="gate-banner unlocked" style="margin-top:32px">
-      <h3>✅ Steps reviewed</h3>
-      <p>One more section — FAQ and useful resources.</p>
-      <div class="nav-row" style="justify-content:center">
-        <button class="btn-back" onclick="goToStep(2)">← Back</button>
-        <button class="btn-next" onclick="goToStep(4)">Continue to FAQ →</button>
-      </div>
-    </div>
+<!-- RESOURCES -->
+<section id="resources">
+  <div class="section-label">Helpful Links</div>
+  <div class="section-title">Key Resources</div>
+  <div class="resources-grid">
+    <a class="resource-card" href="https://bm.viber.com/login" target="_blank">
+      <div class="res-tag">Viber Portal</div>
+      <h4>Viber Business Manager</h4>
+      <p>Official Viber Business Manager portal — where business accounts and templates are managed.</p>
+      <span class="arrow">→ bm.viber.com</span>
+    </a>
+    <a class="resource-card" href="https://developer.8x8.com/connect/docs/viber" target="_blank">
+      <div class="res-tag">8x8 Developer Docs</div>
+      <h4>Viber API Documentation</h4>
+      <p>8x8's complete Viber API reference — sending messages, managing templates, webhooks, and error codes.</p>
+      <span class="arrow">→ developer.8x8.com</span>
+    </a>
+    <a class="resource-card" href="https://connect.8x8.com" target="_blank">
+      <div class="res-tag">8x8 Connect</div>
+      <h4>8x8 Connect Portal</h4>
+      <p>Manage your Viber channel, create and track templates, monitor delivery, and configure campaigns.</p>
+      <span class="arrow">→ connect.8x8.com</span>
+    </a>
+    <a class="resource-card" href="mailto:cpaas-support@8x8.com">
+      <div class="res-tag">Support</div>
+      <h4>8x8 CPaaS Support</h4>
+      <p>Contact the 8x8 team for onboarding assistance, template submission, and account configuration questions.</p>
+      <span class="arrow">→ cpaas-support@8x8.com</span>
+    </a>
   </div>
+</section>
 
-  <!-- ════ STEP 4: FAQ + RESOURCES ════ -->
-  <div class="step-page" id="page-4">
-    <div class="page-eyebrow">Step 5 of 5</div>
-    <div class="page-title">FAQ & Resources</div>
-    <div class="page-sub">Common questions and useful links for your Viber onboarding journey.</div>
+</div><!-- end .main -->
 
-    <div style="margin-bottom:32px">
-      <div class="content-card" style="margin-bottom:10px">
-        <h4>What is the BM Warranty Letter and why do I need to sign it?</h4>
-        <p style="margin-top:8px">It's a legal agreement between your company and Viber Media S.à r.l. By signing, you confirm compliance with Viber's Business Messages Guidelines — only sending to opted-in users, no spam, and handling complaints within 7 days. It's mandatory before Viber approves your sender profile.</p>
-      </div>
-      <div class="content-card" style="margin-bottom:10px">
-        <h4>What is the difference between 1-way and 2-way messaging?</h4>
-        <p style="margin-top:8px"><strong>1-way (outbound only):</strong> You send to customers — OTP, alerts, transactional notifications. Customers cannot reply. Best for high-volume automated sends.<br><br><strong>2-way (conversational):</strong> Customers can reply to your messages. Best for support, engagement, and customer service use cases.</p>
-      </div>
-      <div class="content-card" style="margin-bottom:10px">
-        <h4>How long does Viber's sender approval take?</h4>
-        <p style="margin-top:8px">Typically 5–10 business days after 8x8 submits your complete registration. The timeline starts only after all documents (form, warranty letter, business license, logos) have been received and verified. Incomplete or partial submissions will restart the review clock.</p>
-      </div>
-      <div class="content-card" style="margin-bottom:10px">
-        <h4>What happens if I send messages without a registered template?</h4>
-        <p style="margin-top:8px">As of July 15, 2026, Viber requires pre-approved templates for all transactional and OTP messages. Messages sent without a registered template are reclassified and billed at the promotional rate (higher). There is no failed delivery — the impact is on your invoice. Your CSM will help you register templates as part of onboarding.</p>
-      </div>
-      <div class="content-card" style="margin-bottom:10px">
-        <h4>Can I use my existing Viber account for Business Messages?</h4>
-        <p style="margin-top:8px">No. Viber Business Messages requires a dedicated sender profile created through 8x8's partnership with Viber. This is a separate, verified sender — different from a personal Viber account.</p>
-      </div>
-      <div class="content-card" style="margin-bottom:10px">
-        <h4>Do I need a developer to integrate?</h4>
-        <p style="margin-top:8px">If you use <strong>API integration</strong> — yes, you'll need a developer to configure webhooks and integrate the 8x8 API into your system. If you use the <strong>8x8 Connect Portal</strong> for manual sends or basic automation — no developer is required. Discuss with your CSM during the kick-off call.</p>
-      </div>
-    </div>
-
-    <div style="background:#FFFFFF;border:1px solid var(--border);border-radius:var(--radius);padding:28px 32px;margin-bottom:32px;box-shadow:0 1px 4px rgba(0,0,0,0.05)">
-      <div style="font-size:13px;font-weight:700;color:var(--muted);letter-spacing:1px;text-transform:uppercase;margin-bottom:16px">📎 Useful Links</div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
-        <a href="https://developer.8x8.com/connect/docs/viber/templates" target="_blank" style="background:#F9FAFB;border:1px solid var(--border);border-radius:var(--radius-sm);padding:14px 16px;text-decoration:none;color:var(--dark);font-size:13px;font-weight:600;display:flex;align-items:center;gap:8px;transition:border-color 0.15s">
-          📄 Viber Template Docs →
-        </a>
-        <a href="mailto:cpaas-support@8x8.com" style="background:#F9FAFB;border:1px solid var(--border);border-radius:var(--radius-sm);padding:14px 16px;text-decoration:none;color:var(--dark);font-size:13px;font-weight:600;display:flex;align-items:center;gap:8px">
-          📧 Contact Your CSM →
-        </a>
-      </div>
-    </div>
-
-    <!-- COMPLETE -->
-    <div class="complete-wrap" style="background:linear-gradient(135deg,rgba(115,96,242,0.1),rgba(201,220,80,0.06));border:1px solid rgba(115,96,242,0.3);border-radius:var(--radius)">
-      <span class="complete-icon">🎉</span>
-      <h2>You're fully briefed!</h2>
-      <p>You've completed the Viber onboarding guide. Share the <strong>Viber Onboarding Form</strong> with your team and send all documents to your 8x8 CSM to get started.</p>
-      <div class="complete-actions">
-        <button class="btn-complete" onclick="goToStep(0)">↩ Review Checklist</button>
-        <a class="btn-outline" href="mailto:cpaas-support@8x8.com">📧 Email Your CSM</a>
-      </div>
-    </div>
-
-    <div class="nav-row" style="margin-top:24px">
-      <button class="btn-back" onclick="goToStep(3)">← Back</button>
-    </div>
+<!-- CTA -->
+<div class="cta-wrap">
+  <div class="cta-block">
+    <h2>Ready to get started?</h2>
+    <p>Contact your 8x8 account team to kick off your Viber onboarding.</p>
+    <a class="cta-btn" href="mailto:cpaas-support@8x8.com">Contact 8x8 Team</a>
+    <a class="cta-btn outline" href="https://connect.8x8.com" target="_blank">8x8 Connect Portal →</a>
   </div>
+</div>
 
-</div><!-- end main -->
-</div><!-- end app -->
+<footer>
+  <strong>8x8</strong> &nbsp;·&nbsp; © 2026 8x8, Inc. or its affiliates. All rights reserved. &nbsp;·&nbsp; Viber Business Messaging Onboarding Guide &nbsp;·&nbsp; <a href="mailto:cpaas-support@8x8.com">cpaas-support@8x8.com</a>
+</footer>
 
 <script>
-// ─── STATE ───────────────────────────────────────────────────────────────
-const groupTotals = [8, 5, 4, 2];
-const groupCounts = [0, 0, 0, 0];
-const TOTAL_ITEMS = 19; // sum of groupTotals
-let totalChecked = 0;
-let currentStep = 0;
-const STEPS = 5;
-const unlockedUpTo = [true, false, false, false, false]; // step 0 always open
+  // Path switching
+  var currentPath = 'new';
 
-// ─── TOGGLE CHECKBOX ─────────────────────────────────────────────────────
-function toggle(el) {
-  const wasChecked = el.classList.contains('checked');
-  const group = parseInt(el.dataset.group);
-  
-  if (wasChecked) {
-    el.classList.remove('checked');
-    el.querySelector('.check-box').innerHTML = '';
-    groupCounts[group]--;
-    totalChecked--;
-  } else {
-    el.classList.add('checked');
-    el.querySelector('.check-box').innerHTML = '✓';
-    groupCounts[group]++;
-    totalChecked++;
+  function setPath(path) {
+    currentPath = path;
+    // Cards
+    document.getElementById('card-new').classList.toggle('active', path === 'new');
+    document.getElementById('card-migrate').classList.toggle('active', path === 'migrate');
+    // Tab content
+    var groups = ['prereq', 'steps', 'checklist'];
+    groups.forEach(function(g) {
+      var newEl = document.getElementById(g + '-new');
+      var migEl = document.getElementById(g + '-migrate');
+      if (newEl) newEl.classList.toggle('active', path === 'new');
+      if (migEl) migEl.classList.toggle('active', path === 'migrate');
+    });
+    updateProgress();
   }
-  
-  updateGroupCounts();
+
+  // Checkbox toggle
+  function toggleCheck(el) {
+    el.classList.toggle('checked');
+    updateProgress();
+  }
+
+  // Progress bar
+  function updateProgress() {
+    var suffix = currentPath === 'new' ? '-new' : '-migrate';
+    var checklistEl = document.getElementById('checklist' + suffix);
+    var all = 0, done = 0;
+    if (checklistEl) {
+      var items = checklistEl.querySelectorAll('.check-list li');
+      all = items.length;
+      done = checklistEl.querySelectorAll('.check-list li.checked').length;
+    }
+    // Also count prereq section
+    var prereqEl = document.getElementById('prereq' + suffix);
+    if (prereqEl) {
+      var pItems = prereqEl.querySelectorAll('.check-list li');
+      all += pItems.length;
+      done += prereqEl.querySelectorAll('.check-list li.checked').length;
+    }
+    var pct = all > 0 ? (done / all) * 100 : 0;
+    document.getElementById('progress-bar').style.width = pct + '%';
+    document.getElementById('progress-text').textContent = done + ' / ' + all + ' completed';
+  }
+
   updateProgress();
-  updateGate();
-}
-
-// ─── UPDATE GROUP COUNT BADGES ───────────────────────────────────────────
-function updateGroupCounts() {
-  groupCounts.forEach((count, i) => {
-    const el = document.getElementById('g' + i + '-count');
-    if (el) el.textContent = count + ' / ' + groupTotals[i];
-  });
-  
-  // Update gate items
-  const gateItems = [
-    { id: 'gi-0', label: 'Business Info', i: 0 },
-    { id: 'gi-1', label: 'Logos', i: 1 },
-    { id: 'gi-2', label: 'Messaging Config', i: 2 },
-    { id: 'gi-3', label: 'Technical', i: 3 },
-  ];
-  gateItems.forEach(({ id, label, i }) => {
-    const el = document.getElementById(id);
-    if (!el) return;
-    const done = groupCounts[i] >= groupTotals[i];
-    el.className = 'gate-item' + (done ? ' done' : '');
-    el.innerHTML = `<div class="gi-dot"></div> ${label} (${groupCounts[i]}/${groupTotals[i]})`;
-  });
-}
-
-// ─── UPDATE PROGRESS BAR ─────────────────────────────────────────────────
-function updateProgress() {
-  const pct = Math.round((totalChecked / TOTAL_ITEMS) * 100);
-  document.getElementById('progress-fill').style.width = pct + '%';
-  document.getElementById('progress-num').innerHTML = pct + '% <span>complete</span>';
-  document.getElementById('pct-label').textContent = pct + '%';
-}
-
-// ─── UPDATE GATE BUTTON ──────────────────────────────────────────────────
-function updateGate() {
-  const allDone = groupCounts.every((c, i) => c >= groupTotals[i]);
-  const btn = document.getElementById('btn-next-0');
-  const banner = document.getElementById('gate-0');
-  const title = document.getElementById('gate-title-0');
-  const sub = document.getElementById('gate-sub-0');
-
-  if (allDone) {
-    btn.disabled = false;
-    banner.classList.add('unlocked');
-    title.textContent = '✅ All prerequisites confirmed — you\'re ready to proceed!';
-    sub.textContent = 'Great job! The rest of the onboarding guide is now unlocked. Continue to see your required documents, timeline, and setup steps.';
-    // Unlock all steps
-    for (let i = 1; i < STEPS; i++) {
-      unlockedUpTo[i] = true;
-      updateNavStep(i, false);
-    }
-  } else {
-    btn.disabled = true;
-    banner.classList.remove('unlocked');
-    title.textContent = '⏳ Complete all items above to unlock the next step';
-    sub.textContent = 'Check off all required prerequisites — then the rest of the onboarding guide will unlock for you.';
-    for (let i = 1; i < STEPS; i++) {
-      unlockedUpTo[i] = false;
-      updateNavStep(i, true);
-    }
-  }
-}
-
-// ─── NAV STEP UI ─────────────────────────────────────────────────────────
-function updateNavStep(i, locked) {
-  const navEl = document.getElementById('nav-' + i);
-  if (!navEl) return;
-  navEl.classList.toggle('locked', locked);
-  const ind = navEl.querySelector('.step-indicator');
-  if (locked) {
-    ind.innerHTML = '🔒';
-  } else {
-    ind.innerHTML = (i + 1).toString();
-    if (!navEl.classList.contains('active')) ind.style.color = '';
-  }
-}
-
-// ─── NAVIGATE TO STEP ────────────────────────────────────────────────────
-function goToStep(step) {
-  if (step > 0 && !unlockedUpTo[step]) return;
-  
-  // Hide all pages
-  document.querySelectorAll('.step-page').forEach(p => p.classList.remove('active'));
-  document.querySelectorAll('.sidebar-step').forEach((n, i) => {
-    n.classList.remove('active');
-    // set completed for passed steps
-    if (i < step && unlockedUpTo[i+1]) {
-      n.classList.add('completed');
-      n.querySelector('.step-indicator').innerHTML = '✓';
-    }
-  });
-
-  // Show target page
-  document.getElementById('page-' + step).classList.add('active');
-  const navEl = document.getElementById('nav-' + step);
-  navEl.classList.add('active');
-  navEl.classList.remove('completed');
-  const ind = navEl.querySelector('.step-indicator');
-  ind.innerHTML = (step + 1).toString();
-
-  currentStep = step;
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-}
 </script>
+
 </body>
 </html>
